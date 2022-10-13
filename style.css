@@ -32,17 +32,71 @@ body {
 }
 
 .jobOffer {
-    width: 1030px;
-    height: 90px;
+    width: 1110px;
+    height: 150px;
     background-color: hsl(0, 0%, 100%);
     border-radius: 5px;
     box-shadow: 2px 10px 15px hsla(180, 28%, 50%, 0.15) ;
     margin-bottom: 20px;
-    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
 }
 
+.logoAndJobInfo {
+    display: flex;
+}
 
+.logo {
+    margin: 30px 20px 30px 40px;
+}
 
+.jobInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+h1 {
+    font-size: 20px;
+    color: hsla(180, 14%, 20%, 1);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 15px;
+    color: hsla(180, 28%, 50%, 1);
+    font-weight: 700;
+}
+
+p {
+    font-size: 15px;
+    color: hsla(180, 8%, 52%, 1);
+    font-weight: 500;
+}
+
+.subInfo {
+    display: flex;
+}
+
+.subInfoDetail {
+    margin-right: 21.5px;
+}
+
+.jobDetails {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.tag {
+    font-size: 15px;
+    color: hsla(180, 28%, 50%, 1);
+    background-color: hsla(180, 31%, 95%, 1);
+    margin-left: 10px;
+    padding: 8px 9px;
+    border-radius: ;
+}
 
 
 
