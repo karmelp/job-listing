@@ -147,11 +147,11 @@ function getsvgCircle() {
     svg1.setAttribute("height",3);
     svg1.setAttribute("width",21.5);
     document.body.appendChild(svg1);
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx",1.5);
-    circle.setAttribute("cy",1.5);
-    circle.setAttribute("r",1.5);
-    svg1.appendChild(circle);
+    const circles = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circles.setAttribute("cx",1.5);
+    circles.setAttribute("cy",1.5);
+    circles.setAttribute("r",1.5);
+    svg1.appendChild(circles);
     return svg1;
 }
 
