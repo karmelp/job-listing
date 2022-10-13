@@ -51,5 +51,4 @@ function getPositionName() {
 
 
 
-
 showAllJobOffers();
