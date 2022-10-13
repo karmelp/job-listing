@@ -2,7 +2,7 @@ import data from './data.json' assert {type: 'json'};
 
 console.log(data)
 
-function jobOfferContainer() {
+function jobOfferContainer(job) {
     // võta HTMList tööpakkumiste konteinerelement
     const jobListingsEl = document.querySelector(".jobListingsContainer");
     // loo konteinerelemendi sisse tööpakkumise kontainer
@@ -10,9 +10,9 @@ function jobOfferContainer() {
     //lisa tööpakkumise konteinerile klass
     jobOfferEl.setAttribute("class", "jobOffer")
     // kasuta getCompanyName funktsiooni jobOfferContainer funkstiooni sees
-    const companyNameEl = getCompanyName();
+    const companyNameEl = getCompanyName(job);
     
-    const positionNameEl = getPositionName()
+    const positionNameEl = getPositionName(job);
 
 
     // pane firma nimi tööpakkumise konteineri sisse
@@ -29,9 +29,9 @@ function showAllJobOffers() {
     });
 }
 
-function getCompanyName() {
+function getCompanyName(job) {
     // võta json failist sisse firma nimi
-    let companyName = `${data[0].company}`;
+    let companyName = `${job.company}`;
     // loo h2 element tööpakkuja jaoks
     const companyEl = document.createElement("h2");
     companyEl.innerHTML = companyName;
@@ -39,9 +39,9 @@ function getCompanyName() {
     return companyEl;
 }
 
-function getPositionName() {
+function getPositionName(job) {
     // võta json failist sisse firma nimi
-    let positionName = `${data[0].position}`;
+    let positionName = `${job.position}`;
     // loo h2 element tööpakkuja jaoks
     const positionEl = document.createElement("h1");
     positionEl.innerHTML = positionName;
@@ -52,3 +52,20 @@ function getPositionName() {
 
 
 showAllJobOffers();
+
+
+// const names = [
+//     {name:"anna",pronoun: "she"},
+//     {name: "beth",pronoun: "they"},
+//     {name: "chris",pronoun: "he"},
+//     {name: "daniel",pronoun: "he"},
+//     {name: "ethan",pronoun: "he"}
+// ]
+
+// function rollCall(student) {
+//     console.log(`Student is ${student.name}. Is ${student.pronoun} present? Yes!`);
+// }
+
+// names.forEach((name) => rollCall(name));
+
+// rollCall()
