@@ -1,7 +1,5 @@
 import data from './data.json' assert {type: 'json'};
 
-console.log(data)
-
 function jobOfferContainer(job) {
     // võta HTMList tööpakkumiste konteinerelement
     const jobListingsEl = document.querySelector(".jobListingsContainer");
@@ -11,7 +9,7 @@ function jobOfferContainer(job) {
     jobOfferEl.setAttribute("class", "jobOffer")
     // kasuta getCompanyName funktsiooni jobOfferContainer funkstiooni sees
     const companyNameEl = getCompanyName(job);
-    
+    // kasuta getPositionName funktsiooni jobOfferContainer funkstiooni sees
     const positionNameEl = getPositionName(job);
 
 
@@ -52,20 +50,3 @@ function getPositionName(job) {
 
 
 showAllJobOffers();
-
-
-// const names = [
-//     {name:"anna",pronoun: "she"},
-//     {name: "beth",pronoun: "they"},
-//     {name: "chris",pronoun: "he"},
-//     {name: "daniel",pronoun: "he"},
-//     {name: "ethan",pronoun: "he"}
-// ]
-
-// function rollCall(student) {
-//     console.log(`Student is ${student.name}. Is ${student.pronoun} present? Yes!`);
-// }
-
-// names.forEach((name) => rollCall(name));
-
-// rollCall()
