@@ -112,6 +112,27 @@ function getCompanyName(job) {
     return companyEl;
 }
 
+function featured(featuredLineEl, logoEl, featuredTagEl) {
+    logoEl.style.marginLeft = "35px";
+    featuredLineEl.style.width = "5px";
+    featuredLineEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
+    featuredLineEl.style.borderRadius = "5px 0 0px 5px";
+    featuredTagEl.style.backgroundColor = "hsla(180, 14%, 20%, 1)";
+    featuredTagEl.style.borderRadius = "15px";
+    featuredTagEl.style.padding = "6px 6px 3px 8px";
+    featuredTagEl.style.color = "#fff";
+    featuredTagEl.innerHTML = "FEATURED";
+}
+
+function getNewTag(newTagEl) {
+    newTagEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
+    newTagEl.style.borderRadius = "15px";
+    newTagEl.style.marginRight = "10px";
+    newTagEl.style.padding = "6px 6px 3px 8px";
+    newTagEl.style.color = "#fff";
+    newTagEl.innerHTML = "NEW!";
+}
+
 function getPositionName(job) {
     const positionEl = document.createElement("h1");
     positionEl.innerHTML = `${job.position}`;
@@ -166,9 +187,7 @@ function getTools(job) {
         toolsTagEl.innerHTML = `${job.tools}`;
         return toolsTagEl;
     } else {
-        // let toolsEl = job.indexOf("tools");
-        // job.splice(toolsEl, 1)
-        return 'pole';
+        return '';
     }
 }
 
@@ -185,27 +204,6 @@ function getsvgCircle() {
 
     svg1.appendChild(circles);
     return svg1;
-}
-
-function featured(featuredLineEl, logoEl, featuredTagEl) {
-    logoEl.style.marginLeft = "35px";
-    featuredLineEl.style.width = "5px";
-    featuredLineEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
-    featuredLineEl.style.borderRadius = "5px 0 0px 5px";
-    featuredTagEl.style.backgroundColor = "hsla(180, 14%, 20%, 1)";
-    featuredTagEl.style.borderRadius = "15px";
-    featuredTagEl.style.padding = "6px 6px 3px 8px";
-    featuredTagEl.style.color = "#fff";
-    featuredTagEl.innerHTML = "FEATURED";
-}
-
-function getNewTag(newTagEl) {
-    newTagEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
-    newTagEl.style.borderRadius = "15px";
-    newTagEl.style.marginRight = "10px";
-    newTagEl.style.padding = "6px 6px 3px 8px";
-    newTagEl.style.color = "#fff";
-    newTagEl.innerHTML = "NEW!";
 }
 
 showAllJobOffers();
