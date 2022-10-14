@@ -17,12 +17,21 @@ function jobOfferContainer(job) {
     const logoEl = getCompanyLogo(job);
     // loo konteinerelemendi sisse töö info konteiner
     const jobInfoEl = document.createElement("div")
-
-    const featuredTagEl = getFeatured(job);
     // lisa töö info konteinerile klass
     jobInfoEl.setAttribute("class", "jobInfo")
+    
+
+    // loo konteinerelement firma nime, featured & new tagi jaoks
+    const companyNewFeaturedEl = document.createElement("div")
+    // lisa töö info konteinerile klass
+    companyNewFeaturedEl.setAttribute("class", "companyNewFeatured")
     // kasuta getCompanyName funktsiooni jobOfferContainer funkstiooni sees
     const companyNameEl = getCompanyName(job);
+    // lisa new tag
+    const newTagEl = getNewTag(job);
+    // lisa featured tag
+    const featuredTagEl = getFeaturedTag(job);
+
     // kasuta getPositionName funktsiooni jobOfferContainer funkstiooni sees
     const positionNameEl = getPositionName(job);
 
@@ -57,10 +66,12 @@ function jobOfferContainer(job) {
     jobDetailsEl.append(roleTagEl, levelTagEl, languagesTagEl, toolsTagEl)
     // pane postituse aja, lepingu ja asukoha info subInfo konteineri sisse
     subInfoEl.append(postedAtEl, circleOne, contractEl, circleTwo, locationEl)
-    // pane firma nimi, positsioon ja subinfo jobinfo konteineri sisse
-    jobInfoEl.append(companyNameEl,positionNameEl, subInfoEl)
 
-    logoAndJobInfoEl.append(logoEl, jobInfoEl, featuredTagEl)
+    companyNewFeaturedEl.append(companyNameEl, newTagEl, featuredTagEl)
+    // pane firma nimi, positsioon ja subinfo jobinfo konteineri sisse
+    jobInfoEl.append(companyNewFeaturedEl,positionNameEl, subInfoEl)
+
+    logoAndJobInfoEl.append(logoEl, jobInfoEl)
     // pane logo, töö info ja töö detailid tööpakkumise konteineri sisse
     jobOfferEl.append(logoAndJobInfoEl, jobDetailsEl)
     // pane tööpakkumise konteiner tööpakkumiste konteineri sisse
@@ -113,34 +124,34 @@ function getContract(job) {
 
 function getLocation(job) {
     const locationEl = document.createElement("p");
-    locationEl.className = "subInfoDetail"
+    locationEl.className = "jobDeatilTag"
     locationEl.innerHTML = `${job.location}`;
     return locationEl;
 }
 
 function getRole(job) {
     const roleTagEl = document.createElement("div");
-    roleTagEl.className = "tag"
+    roleTagEl.className = "jobDeatilTag"
     roleTagEl.innerHTML = `${job.role}`;
     return roleTagEl;
 }
 function getLevel(job) {
     const levelTagEl = document.createElement("div");
-    levelTagEl.className = "tag"
+    levelTagEl.className = "jobDeatilTag"
     levelTagEl.innerHTML = `${job.level}`;
     return levelTagEl;
 
 }
 function getLanguages(job) {
     const languagesTagEl = document.createElement("div");
-    languagesTagEl.className = "tag"
+    languagesTagEl.className = "jobDeatilTag"
     languagesTagEl.innerHTML = `${job.languages}`;
     return languagesTagEl;
 }
 
 function getTools(job) {
     const toolsTagEl = document.createElement("div");
-    toolsTagEl.className = "tag";
+    toolsTagEl.className = "jobDeatilTag";
     toolsTagEl.innerHTML = `${job.tools}`;
     return toolsTagEl;
 }
@@ -159,13 +170,23 @@ function getsvgCircle() {
     return svg1;
 }
 
-function getFeatured(job) {
+function getFeaturedTag(job) {
     if (`${job.featured}` === true) {
         // loo konteiner element
         const featuredEl = document.createElement("div");
         featuredEl.className = "featured"
         // pane konteineri sisse kiri
         featuredEl.innerHTML = "FEATURED";
+    }
+}
+
+function getNewTag(job) {
+    if (`${job.new}` === true) {
+        // loo konteiner element
+        const newEl = document.createElement("div");
+        newEl.className = "new"
+        // pane konteineri sisse kiri
+        newEl.innerHTML = "NEW";
     }
 }
 
