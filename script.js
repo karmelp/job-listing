@@ -138,11 +138,8 @@ function getLanguages(job) {
 
 function getTools(job) {
     const toolsTagEl = document.createElement("div");
-    toolsTagEl.className = "tag"
-    for (i in job.languages) {
-        x += `${job.languages[i]}`;
-    }
-    toolsTagEl.innerHTML = x;
+    toolsTagEl.className = "tag";
+    toolsTagEl.innerHTML = `${job.tools}`;
     return toolsTagEl;
 }
 
@@ -159,14 +156,5 @@ function getsvgCircle() {
     svg1.appendChild(circles);
     return svg1;
 }
-
-// function getFeatured() {
-//     // loo konteiner element
-//     const featuredEl = document.createElement("div");
-//     // pane konteineri sisse kiri
-//     featuredEl.innerHTML = "FEATURED";
-
-// }
-
 
 showAllJobOffers();
