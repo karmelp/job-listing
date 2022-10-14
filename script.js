@@ -150,10 +150,14 @@ function getLanguages(job) {
 }
 
 function getTools(job) {
-    const toolsTagEl = document.createElement("div");
-    toolsTagEl.className = "jobDeatilTag";
-    toolsTagEl.innerHTML = `${job.tools}`;
-    return toolsTagEl;
+    if (job.tools.length !== 0) {
+        const toolsTagEl = document.createElement("div");
+        toolsTagEl.className = "jobDeatilTag";
+        toolsTagEl.innerHTML = `${job.tools}`;
+        return toolsTagEl;
+    } else {
+        return 'empty';
+    }
 }
 
 function getsvgCircle() {
