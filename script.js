@@ -156,6 +156,8 @@ function getTools(job) {
         toolsTagEl.innerHTML = `${job.tools}`;
         return toolsTagEl;
     } else {
+        let toolsEl = job.indexOf("tools");
+        job.splice(toolsEl, 1)
         return 'empty';
     }
 }
