@@ -17,6 +17,8 @@ function jobOfferContainer(job) {
     const logoEl = getCompanyLogo(job);
     // loo konteinerelemendi sisse töö info konteiner
     const jobInfoEl = document.createElement("div")
+
+    const featuredTagEl = getFeatured(job);
     // lisa töö info konteinerile klass
     jobInfoEl.setAttribute("class", "jobInfo")
     // kasuta getCompanyName funktsiooni jobOfferContainer funkstiooni sees
@@ -58,7 +60,7 @@ function jobOfferContainer(job) {
     // pane firma nimi, positsioon ja subinfo jobinfo konteineri sisse
     jobInfoEl.append(companyNameEl,positionNameEl, subInfoEl)
 
-    logoAndJobInfoEl.append(logoEl, jobInfoEl)
+    logoAndJobInfoEl.append(logoEl, jobInfoEl, featuredTagEl)
     // pane logo, töö info ja töö detailid tööpakkumise konteineri sisse
     jobOfferEl.append(logoAndJobInfoEl, jobDetailsEl)
     // pane tööpakkumise konteiner tööpakkumiste konteineri sisse
@@ -155,6 +157,16 @@ function getsvgCircle() {
 
     svg1.appendChild(circles);
     return svg1;
+}
+
+function getFeatured(job) {
+    if (`${job.featured}` === true) {
+        // loo konteiner element
+        const featuredEl = document.createElement("div");
+        featuredEl.className = "featured"
+        // pane konteineri sisse kiri
+        featuredEl.innerHTML = "FEATURED";
+    }
 }
 
 showAllJobOffers();
