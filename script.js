@@ -130,18 +130,19 @@ function getLevel(job) {
 
 }
 function getLanguages(job) {
-    job.forEach((language) => {
-        const languagesTagEl = document.createElement("div");
-        languagesTagEl.className = "tag"
-        languagesTagEl.innerHTML = `${language}`;
-        return languagesTagEl;
-    })
+    const languagesTagEl = document.createElement("div");
+    languagesTagEl.className = "tag"
+    languagesTagEl.innerHTML = `${job.languages}`;
+    return languagesTagEl;
 }
 
 function getTools(job) {
     const toolsTagEl = document.createElement("div");
     toolsTagEl.className = "tag"
-    toolsTagEl.innerHTML = `${job.tools}`;
+    for (i in job.languages) {
+        x += `${job.languages[i]}`;
+    }
+    toolsTagEl.innerHTML = x;
     return toolsTagEl;
 }
 
