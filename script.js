@@ -124,7 +124,7 @@ function getContract(job) {
 
 function getLocation(job) {
     const locationEl = document.createElement("p");
-    locationEl.className = "jobDeatilTag"
+    locationEl.className = "subInfoDetail"
     locationEl.innerHTML = `${job.location}`;
     return locationEl;
 }
