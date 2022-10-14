@@ -127,12 +127,15 @@ function getLevel(job) {
     levelTagEl.className = "tag"
     levelTagEl.innerHTML = `${job.level}`;
     return levelTagEl;
+
 }
 function getLanguages(job) {
-    const languagesTagEl = document.createElement("div");
-    languagesTagEl.className = "tag"
-    languagesTagEl.innerHTML = `${job.languages}`;
-    return languagesTagEl;
+    job.forEach((language) => {
+        const languagesTagEl = document.createElement("div");
+        languagesTagEl.className = "tag"
+        languagesTagEl.innerHTML = `${language}`;
+        return languagesTagEl;
+    })
 }
 
 function getTools(job) {
@@ -151,17 +154,10 @@ function getsvgCircle() {
     circles.setAttribute("cx",1.5);
     circles.setAttribute("cy",1.5);
     circles.setAttribute("r",1.5);
+
     svg1.appendChild(circles);
     return svg1;
 }
-
-
-
-// function getJobDetails(job) {
-//     const jobDetailsEl = document.createElement("div");
-//     jobDetailsEl.innerHTML = `${job.languages} ${job.tools}`;
-//     return jobDetailsEl;
-// }
 
 // function getFeatured() {
 //     // loo konteiner element
