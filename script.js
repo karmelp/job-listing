@@ -175,7 +175,7 @@ function getLevel(job) {
 }
 function getLanguages(job) {
 
-    job.languages.map(job.languages)) {
+    for (const [language, value] of Object.entries(job.languages)) {
         const languagesTagEl = document.createElement("div");
         languagesTagEl.className = "jobDeatilTag"
         languagesTagEl.innerHTML = `${value}`;
