@@ -162,57 +162,43 @@ function getLocation(job) {
 
 function getRole(job) {
     const roleTagEl = document.createElement("div");
-    roleTagEl.className = "jobDeatilTag"
+    roleTagEl.className = "jobDetailTag"
     roleTagEl.innerHTML = `${job.role}`;
     return roleTagEl;
 }
 function getLevel(job) {
     const levelTagEl = document.createElement("div");
-    levelTagEl.className = "jobDeatilTag"
+    levelTagEl.className = "jobDetailTag"
     levelTagEl.innerHTML = `${job.level}`;
     return levelTagEl;
 
 }
 function getLanguages(job) {
-    job.languages.forEach(language => {
+    const langagesWrapperEl = document.createElement("div");
+    langagesWrapperEl.className = "wrapper"
+    
+    job.languages.forEach((language) => {
         const languagesTagEl = document.createElement("div");
-            languagesTagEl.className = "jobDeatilTag"
-            languagesTagEl.innerHTML = `${language}`;
-            return languagesTagEl;
+        languagesTagEl.className = "jobDetailTag"
+        languagesTagEl.innerHTML = `${language}`;
+        langagesWrapperEl.append(languagesTagEl);
     })
-
-    // job.languages.map((language) => {
-    //     job.languages.forEach(() => {
-    //         const languagesTagEl = document.createElement("div");
-    //         languagesTagEl.className = "jobDeatilTag"
-    //         languagesTagEl.innerHTML = `${language}`;
-    //         return languagesTagEl;
-    //         console.log(languagesTagEl);
-    //     })
-    // })
-    // for (const [language, value] of Object.entries(job.languages)) {
-    //     const languagesTagEl = document.createElement("div");
-    //     languagesTagEl.className = "jobDeatilTag"
-    //     languagesTagEl.innerHTML = `${value}`;
-    //     return languagesTagEl;
-    //   }
-
-    // const language = job.languages.map(language => {
-    //     job.languages.forEach((language) => {
-    //         const languagesTagEl = document.createElement("div");
-    //         languagesTagEl.className = "jobDeatilTag"
-    //         languagesTagEl.innerHTML = `${language}`;
-    //         return languagesTagEl;
-    //     })
-    // })
+    return langagesWrapperEl;
 }
 
 function getTools(job) {
     if (job.tools.length !== 0) {
-        const toolsTagEl = document.createElement("div");
-        toolsTagEl.className = "jobDeatilTag";
-        toolsTagEl.innerHTML = `${job.tools}`;
-        return toolsTagEl;
+        const toolsWrapperEl = document.createElement("div");
+        toolsWrapperEl.className = "wrapper"
+
+        job.tools.forEach((tool) => {
+            const toolsTagEl = document.createElement("div");
+            toolsTagEl.className = "jobDetailTag";
+            toolsTagEl.innerHTML = `${tool}`;
+            toolsWrapperEl.append(toolsTagEl);
+        })
+        
+        return toolsWrapperEl;
     } else {
         return '';
     }

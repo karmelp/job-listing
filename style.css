@@ -96,7 +96,7 @@ p {
     margin-right: 40px;
 }
 
-.jobDeatilTag {
+.jobDetailTag {
     font-size: 15px;
     color: hsla(180, 28%, 50%, 1);
     background-color: hsla(180, 31%, 95%, 1);
@@ -122,6 +122,10 @@ p {
     background-color: hsla(180, 14%, 20%, 1);
     border-radius: 15px;
     color: #fff;
+}
+
+.wrapper {
+    display: flex;
 }
 
 
