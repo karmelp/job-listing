@@ -1,5 +1,42 @@
 import data from './data.json' assert {type: 'json'};
 
+const buttonEl = document.querySelector(".filterBtnIcon")
+const filterPanelEl = document.querySelector(".filtersPanel")
+
+document.querySelector(".filterBtn").addEventListener('mouseenter', () => {
+    if (filterPanelEl.style.visibility === "hidden") { 
+        buttonEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
+        buttonEl.innerHTML = '<img src="images/icon-up-hover.svg" />';
+    } else {
+        buttonEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
+        buttonEl.innerHTML = '<img src="images/icon-down-hover.svg" />';
+    }
+})
+
+document.querySelector(".filterBtn").addEventListener('mouseleave', () => {
+    if (filterPanelEl.style.visibility === "hidden") { 
+        buttonEl.style.backgroundColor = "hsla(180, 31%, 95%, 1)";
+        buttonEl.innerHTML = '<img src="images/icon-up-active.svg" />';
+    } else {
+        buttonEl.style.backgroundColor = "hsla(180, 31%, 95%, 1)";
+        buttonEl.innerHTML = '<img src="images/icon-down-active.svg" />';
+    }
+})
+
+function toggleFilterBtn() {
+    if (filterPanelEl.style.visibility === "hidden") {
+        filterPanelEl.style.visibility = "visible";
+        buttonEl.innerHTML = '<img src="images/icon-up-active.svg" />';
+        buttonEl.style.backgroundColor = "hsla(180, 31%, 95%, 1)";
+    } else {
+        filterPanelEl.style.visibility = "hidden";
+        buttonEl.innerHTML = '<img src="images/icon-down-active.svg" />';
+        buttonEl.style.backgroundColor = "hsla(180, 31%, 95%, 1)";
+    }
+}
+document.querySelector(".filterBtn").onclick = toggleFilterBtn;
+
+
 function jobOfferContainer(job) {
     // võta HTMList tööpakkumiste konteinerelement
     const jobListingsEl = document.querySelector(".jobListingsContainer");
@@ -19,7 +56,6 @@ function jobOfferContainer(job) {
     const jobInfoEl = document.createElement("div")
     // lisa töö info konteinerile klass
     jobInfoEl.setAttribute("class", "jobInfo")
-   
     // loo firma nime, featured & new tagi jaoks konteiner
     const companyNewFeaturedEl = document.createElement("div")
     // lisa firma nime, featured & new tagi konteinerile klass
@@ -39,10 +75,8 @@ function jobOfferContainer(job) {
         // siis ava featured funktsioon
         featured(featuredLineEl, logoEl, featuredTagEl);
     }
-
     // võta positsiooni nimetus getPositionName funktsioonist
     const positionNameEl = getPositionName(job);
-
     // loo töö alaminfo jaoks eraldi konteiner 
     const subInfoEl = document.createElement("div")
     // lisa töö alaminfo konteinerile klass
@@ -57,8 +91,6 @@ function jobOfferContainer(job) {
     const circleTwo = getsvgCircle()
     // võta töö asukoht getLocation funktsioonist
     const locationEl = getLocation(job);
-
-
     // loo tagide jaoks eraldi konteiner
     const jobDetailTagsEl = document.createElement("div")
     // lisa tagide konteinerile klass
@@ -71,7 +103,6 @@ function jobOfferContainer(job) {
     const languagesTagEl = getLanguages(job)
     // võta tools tag getTools funktsioonist
     const toolsTagEl = getTools(job)
-
     // pane tagid töö detaili tagide konteineri sisse 
     jobDetailTagsEl.append(roleTagEl, levelTagEl, languagesTagEl, toolsTagEl)
     // pane postituse aeg, ring1, leping, ring2 ja asukoht alaminfo konteineri sisse
@@ -183,6 +214,7 @@ function getLanguages(job) {
         languagesTagEl.innerHTML = `${language}`;
         langagesWrapperEl.append(languagesTagEl);
     })
+
     return langagesWrapperEl;
 }
 
@@ -197,7 +229,7 @@ function getTools(job) {
             toolsTagEl.innerHTML = `${tool}`;
             toolsWrapperEl.append(toolsTagEl);
         })
-        
+
         return toolsWrapperEl;
     } else {
         return '';
@@ -214,7 +246,6 @@ function getsvgCircle() {
     circles.setAttribute("cy",1.5);
     circles.setAttribute("r",1.5);
     circles.style.fill = "hsla(180, 8%, 52%, 1)";
-
     svg1.appendChild(circles);
     return svg1;
 }
