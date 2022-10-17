@@ -36,8 +36,6 @@ function toggleFilterBtn() {
 }
 document.querySelector(".filterBtn").onclick = toggleFilterBtn;
 
-
-
 function jobOfferContainer(job) {
     // võta HTMList tööpakkumiste konteinerelement
     const jobListingsEl = document.querySelector(".jobListingsContainer");
@@ -195,12 +193,14 @@ function getLocation(job) {
 function getRole(job) {
     const roleTagEl = document.createElement("div");
     roleTagEl.className = "jobDetailTag"
+    roleTagEl.setAttribute("tagTitle", `${job.role}`);
     roleTagEl.innerHTML = `${job.role}`;
     return roleTagEl;
 }
 function getLevel(job) {
     const levelTagEl = document.createElement("div");
     levelTagEl.className = "jobDetailTag"
+    levelTagEl.setAttribute("tagTitle", `${job.level}`);
     levelTagEl.innerHTML = `${job.level}`;
     return levelTagEl;
 
@@ -212,12 +212,14 @@ function getLanguages(job) {
     job.languages.forEach((language) => {
         const languagesTagEl = document.createElement("div");
         languagesTagEl.className = "jobDetailTag"
+        languagesTagEl.setAttribute("tagTitle", `${language}`);
         languagesTagEl.innerHTML = `${language}`;
         langagesWrapperEl.append(languagesTagEl);
     })
 
     return langagesWrapperEl;
 }
+
 
 function getTools(job) {
     if (job.tools.length !== 0) {
@@ -227,6 +229,7 @@ function getTools(job) {
         job.tools.forEach((tool) => {
             const toolsTagEl = document.createElement("div");
             toolsTagEl.className = "jobDetailTag";
+            toolsTagEl.setAttribute("tagTitle", `${tool}`);
             toolsTagEl.innerHTML = `${tool}`;
             toolsWrapperEl.append(toolsTagEl);
         })
