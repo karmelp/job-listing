@@ -6,20 +6,20 @@ const filterPanelEl = document.querySelector(".filtersPanel")
 document.querySelector(".filterBtn").addEventListener('mouseenter', () => {
     if (filterPanelEl.style.visibility === "hidden") { 
         buttonEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
-        buttonEl.innerHTML = '<img src="images/icon-up-hover.svg" />';
+        buttonEl.innerHTML = '<img src="images/icon-down-hover.svg" />';
     } else {
         buttonEl.style.backgroundColor = "hsla(180, 28%, 50%, 1)";
-        buttonEl.innerHTML = '<img src="images/icon-down-hover.svg" />';
+        buttonEl.innerHTML = '<img src="images/icon-up-hover.svg" />';
     }
 })
 
 document.querySelector(".filterBtn").addEventListener('mouseleave', () => {
     if (filterPanelEl.style.visibility === "hidden") { 
         buttonEl.style.backgroundColor = "hsla(180, 31%, 95%, 1)";
-        buttonEl.innerHTML = '<img src="images/icon-up-active.svg" />';
+        buttonEl.innerHTML = '<img src="images/icon-down-active.svg" />';
     } else {
         buttonEl.style.backgroundColor = "hsla(180, 31%, 95%, 1)";
-        buttonEl.innerHTML = '<img src="images/icon-down-active.svg" />';
+        buttonEl.innerHTML = '<img src="images/icon-up-active.svg" />';
     }
 })
 
@@ -35,6 +35,8 @@ function toggleFilterBtn() {
     }
 }
 document.querySelector(".filterBtn").onclick = toggleFilterBtn;
+
+
 
 function jobOfferContainer(job) {
     // võta HTMList tööpakkumiste konteinerelement
