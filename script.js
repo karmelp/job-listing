@@ -240,6 +240,37 @@ function getTools(job) {
     }
 }
 
+function createFilterTag(filterTitleEl) {
+    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    const filterTagEl = document.createElement("li")
+    filterTagEl.className = "filterTag";
+    const filterTagTitleEl = document.createElement("h2")
+    filterTagTitleEl.innerHTML = filterTitleEl;
+    const filterTagIconEl = document.createElement("div")
+    filterTagIconEl.className = "filterTagIcon";
+    filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'
+            
+    filterTagEl.append(filterTagTitleEl, filterTagIconEl)
+    chosenFilterTagsEl.append(filterTagEl)
+
+    return filterTagEl;
+}
+
+function filterClick(event) {
+    const filterTitleEl = event.target.getAttribute("filter-title");
+    createFilterTag(filterTitleEl);
+
+    // job = job.languages.map((language) => {
+    //     if (filterTitleEl === `${language}`) {
+    //         return jobOfferContainer(`${language}`);
+    //     } else {
+    //         return jobOfferContainer;
+    //     }
+    // });
+}
+
+document.querySelector(".filter").onclick = filterClick;
+
 function getsvgCircle() {
     const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg1.setAttribute("height",3);
