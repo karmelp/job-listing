@@ -208,7 +208,6 @@ function getLevel(job) {
 function getLanguages(job) {
     const langagesWrapperEl = document.createElement("div");
     langagesWrapperEl.className = "wrapper"
-    
     job.languages.forEach((language) => {
         const languagesTagEl = document.createElement("div");
         languagesTagEl.className = "jobDetailTag"
@@ -275,6 +274,9 @@ const filtersNodeListEl = document.querySelectorAll(".filter");
 
 const filters = Array.from(filtersNodeListEl);
 console.log(filters)
+
+const filter = Object.assign({}, filters)
+console.log(filter)
 
 filters.onclick = filterClick;
 // document.querySelectorAll(".filter").onclick = filterClick;
