@@ -244,7 +244,9 @@ function createFilterTag(filterTitleEl) {
     const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
     const filterTagEl = document.createElement("li")
     filterTagEl.className = "filterTag";
+    filterTagEl.setAttribute("filterTitle", filterTitleEl);
     const filterTagTitleEl = document.createElement("h2")
+    filterTagTitleEl.className = "filterTagTitle"
     filterTagTitleEl.innerHTML = filterTitleEl;
     const filterTagIconEl = document.createElement("div")
     filterTagIconEl.className = "filterTagIcon";
@@ -257,9 +259,9 @@ function createFilterTag(filterTitleEl) {
 }
 
 function filterClick(event) {
-    const filterTitleEl = event.target.getAttribute("filter-title");
+    const filterTitleEl = event.target.setAttribute();
     createFilterTag(filterTitleEl);
-
+    console.log('I clicked: ', filterTitleEl)
     // job = job.languages.map((language) => {
     //     if (filterTitleEl === `${language}`) {
     //         return jobOfferContainer(`${language}`);
@@ -269,7 +271,15 @@ function filterClick(event) {
     // });
 }
 
-document.querySelector(".filter").onclick = filterClick;
+const filtersNodeListEl = document.querySelectorAll(".filter");
+
+const filters = Array.from(filtersNodeListEl);
+console.log(filters)
+
+filters.onclick = filterClick;
+// document.querySelectorAll(".filter").onclick = filterClick;
+// console.log(document.querySelectorAll(".filter"))
+
 
 function getsvgCircle() {
     const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
