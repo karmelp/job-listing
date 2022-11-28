@@ -190,6 +190,20 @@ function getLocation(job) {
     return locationEl;
 }
 
+function getsvgCircle() {
+    const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg1.setAttribute("height",3);
+    svg1.setAttribute("width",21.5);
+    document.body.appendChild(svg1);
+    const circles = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circles.setAttribute("cx",1.5);
+    circles.setAttribute("cy",1.5);
+    circles.setAttribute("r",1.5);
+    circles.style.fill = "hsla(180, 8%, 52%, 1)";
+    svg1.appendChild(circles);
+    return svg1;
+}
+
 function getRole(job) {
     const roleTagEl = document.createElement("div");
     roleTagEl.className = "jobDetailTag"
@@ -257,44 +271,34 @@ function createFilterTag(filterTitleEl) {
     return filterTagEl;
 }
 
-function filterClick(event) {
-    const filterTitleEl = event.target.setAttribute();
-    createFilterTag(filterTitleEl);
-    console.log('I clicked: ', filterTitleEl)
+// function filterClick(event) {
+//     const filterTitleEl = event.target.getAttribute('innerHTML');
+//     createFilterTag(filterTitleEl);
+
     // job = job.languages.map((language) => {
-    //     if (filterTitleEl === `${language}`) {
+    //     if (filterTitleEl === `${language}`) {®
     //         return jobOfferContainer(`${language}`);
     //     } else {
     //         return jobOfferContainer;
     //     }
     // });
-}
+// }
 
-const filtersNodeListEl = document.querySelectorAll(".filter");
+const filtersNodeListEl = document.querySelectorAll(".filter")
 
-const filters = Array.from(filtersNodeListEl);
-console.log(filters)
+filtersNodeListEl.forEach(filter => {
+    console.log('filter', filter)
+})
 
-const filter = Object.assign({}, filters)
-console.log(filter)
 
-filters.onclick = filterClick;
+// const filters = Array.from(filtersNodeListEl);
+// console.log(filters)
+
+// const filter = Object.assign({}, filters)
+// console.log(filter)
+
+// filters.onclick = filterClick;
 // document.querySelectorAll(".filter").onclick = filterClick;
 // console.log(document.querySelectorAll(".filter"))
-
-
-function getsvgCircle() {
-    const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg1.setAttribute("height",3);
-    svg1.setAttribute("width",21.5);
-    document.body.appendChild(svg1);
-    const circles = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circles.setAttribute("cx",1.5);
-    circles.setAttribute("cy",1.5);
-    circles.setAttribute("r",1.5);
-    circles.style.fill = "hsla(180, 8%, 52%, 1)";
-    svg1.appendChild(circles);
-    return svg1;
-}
 
 showAllJobOffers();
