@@ -271,24 +271,34 @@ function createFilterTag(filterTitleEl) {
     return filterTagEl;
 }
 
-// function filterClick(event) {
-//     const filterTitleEl = event.target.getAttribute('innerHTML');
-//     createFilterTag(filterTitleEl);
 
-    // job = job.languages.map((language) => {
-    //     if (filterTitleEl === `${language}`) {®
-    //         return jobOfferContainer(`${language}`);
-    //     } else {
-    //         return jobOfferContainer;
-    //     }
-    // });
+// function filterClick(event) {
+//     const filterTitleEl = event.target.textContent;
+//     return createFilterTag(filterTitleEl);
+
+//     // job = job.languages.map((language) => {
+//     //     if (filterTitleEl === `${language}`) {
+//     //         return jobOfferContainer(`${language}`);
+//     //     } else {
+//     //         return jobOfferContainer;
+//     //     }
+//     // });
 // }
 
-const filtersNodeListEl = document.querySelectorAll(".filter")
+const filters = document.querySelectorAll("#filter");
+filters.forEach(function (i) {
+    i.addEventListener('click', function filterClick(event) {
+        const filterTitleEl = event.target.textContent;
+        return createFilterTag(filterTitleEl);
+    })
+});
 
-filtersNodeListEl.forEach(filter => {
-    console.log('filter', filter)
-})
+
+// const filtersNodeListEl = document.querySelectorAll(".filter")
+
+// filtersNodeListEl.forEach(filter => {
+//     console.log('filter', filter)
+// })
 
 
 // const filters = Array.from(filtersNodeListEl);
@@ -298,7 +308,7 @@ filtersNodeListEl.forEach(filter => {
 // console.log(filter)
 
 // filters.onclick = filterClick;
-// document.querySelectorAll(".filter").onclick = filterClick;
+
 // console.log(document.querySelectorAll(".filter"))
 
 showAllJobOffers();
