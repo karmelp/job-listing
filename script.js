@@ -277,10 +277,13 @@ const filters = document.querySelectorAll("#filter");
 filters.forEach(function (i) {
     // ...külge click funktsioon
     i.addEventListener('click', function filterClick(event) {
-        // kui klikitud button on juba aktiivne...
+        // kui klikitud button oli juba aktiivne...
         if (this.classList.contains("activeFilter")){
             // ...dektiveeri see
             this.classList.remove("activeFilter")
+            // ja eemalda nupp filtriribalt
+            const filterTitleEl = event.target.textContent;
+            createFilterTag(filterTitleEl).remove()
         // kui aga nupp pole aktiivne...
         } else {
             // ...siis aktiveeri see
@@ -291,7 +294,6 @@ filters.forEach(function (i) {
         }
     })
 });
-
 
 // function filterClick(event) {
 //     const filterTitleEl = event.target.textContent;
