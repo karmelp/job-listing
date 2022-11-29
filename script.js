@@ -254,7 +254,7 @@ function getTools(job) {
 }
 
 function createFilterTag(filterTitleEl) {
-    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    // const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
     const filterTagEl = document.createElement("li")
     filterTagEl.className = "filterTag";
     filterTagEl.setAttribute("filterTitle", filterTitleEl);
@@ -266,31 +266,33 @@ function createFilterTag(filterTitleEl) {
     filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'
             
     filterTagEl.append(filterTagTitleEl, filterTagIconEl)
-    chosenFilterTagsEl.append(filterTagEl)
+    // chosenFilterTagsEl.append(filterTagEl)
 
     return filterTagEl;
 }
 
-// vali köik filtrid
+// vali köik filter idga elemendid
 const filters = document.querySelectorAll("#filter");
-// pane igaühele...
+// pane igaühele neist...
 filters.forEach(function (i) {
     // ...külge click funktsioon
     i.addEventListener('click', function filterClick(event) {
+        // võta filtririba element
+        const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+        const filterTitleEl = event.target.textContent;
+        const filter = createFilterTag(filterTitleEl)
         // kui klikitud button oli juba aktiivne...
         if (this.classList.contains("activeFilter")){
             // ...dektiveeri see
             this.classList.remove("activeFilter")
             // ja eemalda nupp filtriribalt
-            const filterTitleEl = event.target.textContent;
-            createFilterTag(filterTitleEl).remove()
+            chosenFilterTagsEl.parentNode.removeChild(filter);
         // kui aga nupp pole aktiivne...
         } else {
             // ...siis aktiveeri see
             this.classList.add("activeFilter")
             // ja tekita filtriribale sellele vastav nupp
-            const filterTitleEl = event.target.textContent;
-            createFilterTag(filterTitleEl);
+            chosenFilterTagsEl.append(filter)
         }
     })
 });
