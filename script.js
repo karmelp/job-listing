@@ -279,8 +279,8 @@ filters.forEach(filter => {
     filter.addEventListener('click', function (event) {
 
         const filterTitleEl = event.target.textContent;
-        const jobOffersToHide = document.querySelectorAll(`.jobDetailTags .jobDetailTag:not([tagtitle='${filterTitleEl}'])`);
-        const jobOffersToShow = document.querySelectorAll(`.jobDetailTags [tagtitle='${filterTitleEl}']`);
+        const jobOffersToHide = document.querySelectorAll(`.jobOffer .jobDetailTags .jobDetailTag:not([tagtitle='${filterTitleEl}'])`);
+        const jobOffersToShow = document.querySelectorAll(`.jobOffer [tagtitle='${filterTitleEl}']`);
 
         jobOffersToHide.forEach(el => {
             el.classList.add('hide');
@@ -292,23 +292,23 @@ filters.forEach(filter => {
             el.classList.add('show'); 
           });
 
-        // // võta filtririba element
-        // const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+        // võta filtririba element
+        const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
         // const filterTitleEl = event.target.textContent;
-        // const filter = createFilterTag(filterTitleEl)
-        // // kui klikitud button oli juba aktiivne...
-        // if (this.classList.contains("activeFilter")){
-        //     // ...dektiveeri see
-        //     this.classList.remove("activeFilter")
-        //     // ja eemalda nupp filtriribalt
-        //     chosenFilterTagsEl.parentNode.removeChild(filter);
-        // // kui aga nupp pole aktiivne...
-        // } else {
-        //     // ...siis aktiveeri see
-        //     this.classList.add("activeFilter")
-        //     // ja tekita filtriribale sellele vastav nupp
-        //     chosenFilterTagsEl.append(filter)
-        // }
+        const filter = createFilterTag(filterTitleEl)
+        // kui klikitud button oli juba aktiivne...
+        if (this.classList.contains("activeFilter")){
+            // ...dektiveeri see
+            this.classList.remove("activeFilter")
+            // ja eemalda nupp filtriribalt
+            chosenFilterTagsEl.parentNode.removeChild(filter);
+        // kui aga nupp pole aktiivne...
+        } else {
+            // ...siis aktiveeri see
+            this.classList.add("activeFilter")
+            // ja tekita filtriribale sellele vastav nupp
+            chosenFilterTagsEl.append(filter)
+        }
     })
 });
 
