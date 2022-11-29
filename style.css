@@ -222,6 +222,11 @@ p {
     outline: 1px dashed hsl(180, 28%, 50%);
 }
 
+.activeFilter {
+    background-color: hsla(180, 28%, 50%, 1);
+    color: hsla(180, 31%, 95%, 1);
+}
+
 .tag {
     padding: 10px;
 }

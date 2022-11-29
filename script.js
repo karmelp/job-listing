@@ -271,6 +271,27 @@ function createFilterTag(filterTitleEl) {
     return filterTagEl;
 }
 
+// vali köik filtrid
+const filters = document.querySelectorAll("#filter");
+// pane igaühele...
+filters.forEach(function (i) {
+    // ...külge click funktsioon
+    i.addEventListener('click', function filterClick(event) {
+        // kui klikitud button on juba aktiivne...
+        if (this.classList.contains("activeFilter")){
+            // ...dektiveeri see
+            this.classList.remove("activeFilter")
+        // kui aga nupp pole aktiivne...
+        } else {
+            // ...siis aktiveeri see
+            this.classList.add("activeFilter")
+            // ja tekita filtriribale sellele vastav nupp
+            const filterTitleEl = event.target.textContent;
+            createFilterTag(filterTitleEl);
+        }
+    })
+});
+
 
 // function filterClick(event) {
 //     const filterTitleEl = event.target.textContent;
@@ -284,14 +305,6 @@ function createFilterTag(filterTitleEl) {
 //     //     }
 //     // });
 // }
-
-const filters = document.querySelectorAll("#filter");
-filters.forEach(function (i) {
-    i.addEventListener('click', function filterClick(event) {
-        const filterTitleEl = event.target.textContent;
-        return createFilterTag(filterTitleEl);
-    })
-});
 
 
 // const filtersNodeListEl = document.querySelectorAll(".filter")
