@@ -271,44 +271,46 @@ function createFilterTag(filterTitleEl) {
     return filterTagEl;
 }
 
-// vali köik filter idga elemendid
+// vali köik filter IDga elemendid
 const filters = document.querySelectorAll("#filter");
 // pane igaühele neist...
-filters.forEach(function (i) {
+filters.forEach(filter => {
     // ...külge click funktsioon
-    i.addEventListener('click', function filterClick(event) {
-        // võta filtririba element
-        const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    filter.addEventListener('click', function (event) {
+
         const filterTitleEl = event.target.textContent;
-        const filter = createFilterTag(filterTitleEl)
-        // kui klikitud button oli juba aktiivne...
-        if (this.classList.contains("activeFilter")){
-            // ...dektiveeri see
-            this.classList.remove("activeFilter")
-            // ja eemalda nupp filtriribalt
-            chosenFilterTagsEl.parentNode.removeChild(filter);
-        // kui aga nupp pole aktiivne...
-        } else {
-            // ...siis aktiveeri see
-            this.classList.add("activeFilter")
-            // ja tekita filtriribale sellele vastav nupp
-            chosenFilterTagsEl.append(filter)
-        }
+        const jobOffersToHide = document.querySelectorAll(`.jobDetailTags .jobDetailTag:not([tagtitle='${filterTitleEl}'])`);
+        const jobOffersToShow = document.querySelectorAll(`.jobDetailTags [tagtitle='${filterTitleEl}']`);
+
+        jobOffersToHide.forEach(el => {
+            el.classList.add('hide');
+            el.classList.remove('show');
+        });
+      
+          jobOffersToShow.forEach(el => {
+            el.classList.remove('hide');
+            el.classList.add('show'); 
+          });
+
+        // // võta filtririba element
+        // const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+        // const filterTitleEl = event.target.textContent;
+        // const filter = createFilterTag(filterTitleEl)
+        // // kui klikitud button oli juba aktiivne...
+        // if (this.classList.contains("activeFilter")){
+        //     // ...dektiveeri see
+        //     this.classList.remove("activeFilter")
+        //     // ja eemalda nupp filtriribalt
+        //     chosenFilterTagsEl.parentNode.removeChild(filter);
+        // // kui aga nupp pole aktiivne...
+        // } else {
+        //     // ...siis aktiveeri see
+        //     this.classList.add("activeFilter")
+        //     // ja tekita filtriribale sellele vastav nupp
+        //     chosenFilterTagsEl.append(filter)
+        // }
     })
 });
-
-// function filterClick(event) {
-//     const filterTitleEl = event.target.textContent;
-//     return createFilterTag(filterTitleEl);
-
-//     // job = job.languages.map((language) => {
-//     //     if (filterTitleEl === `${language}`) {
-//     //         return jobOfferContainer(`${language}`);
-//     //     } else {
-//     //         return jobOfferContainer;
-//     //     }
-//     // });
-// }
 
 
 // const filtersNodeListEl = document.querySelectorAll(".filter")
@@ -323,8 +325,6 @@ filters.forEach(function (i) {
 
 // const filter = Object.assign({}, filters)
 // console.log(filter)
-
-// filters.onclick = filterClick;
 
 // console.log(document.querySelectorAll(".filter"))
 

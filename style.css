@@ -101,7 +101,7 @@ body {
     border-radius: 0 3px 3px 0;
 }
 
-.filterTagIcon:hover {
+.filterTag:hover .filterTagIcon {
     background-color: hsla(180, 14%, 20%, 1);
 }
 
@@ -121,8 +121,7 @@ body {
 .filtersPanel {
     position: absolute;
     z-index: 200;
-    top: 180px;
-    left: 10%;
+    top: 60px;
     padding: 5px;
     border-radius: 3px;
     background-color: hsla(180, 52%, 96%, 1);
