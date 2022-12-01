@@ -1,7 +1,29 @@
 import data from './data.json' assert {type: 'json'};
 
+const normalizedJobOffers = data.map((jobOffer) => {
+    return {
+      id: jobOffer.id,
+      company: jobOffer.company,
+      logo: jobOffer.logo,
+      new: jobOffer.new,
+      featured: jobOffer.featured,
+      position: jobOffer.position,
+      postedAt: jobOffer.postedAt,
+      contract: jobOffer.contract,
+      location: jobOffer.location,
+      // kolm täppi (...), sest tools ja languages on arrayd ja me ei taha, et array sees oleks array.
+      filters: [
+        jobOffer.level,
+        jobOffer.languages,
+        ...jobOffer.tools,
+        ...jobOffer.languages,
+      ],
+    };
+  });
+
 const buttonEl = document.querySelector(".filterBtnIcon")
 const filterPanelEl = document.querySelector(".filtersPanel")
+let activeFilters = [];
 
 document.querySelector(".filterBtn").addEventListener('mouseenter', () => {
     if (filterPanelEl.style.visibility === "hidden") { 
@@ -118,10 +140,18 @@ function jobOfferContainer(job) {
     jobListingsEl.appendChild(jobOfferEl)
 }
 
+// .filter meetod tagastab ainult need job offerid, mille puhul return tingimus on tõene
+const filteredData = normalizedJobOffers.filter((normalizedJobOffer) => {
+    // tingimus on, et iga aktiivne filter (every) peab sisalduma töökuulutuse filtris (includes)
+    return activeFilters.every((filter) =>
+        normalizedJobOffer.filters.includes(filter)
+    );
+});
+
 // Kasutaja näeb kõiki tööpakkumisi
 function showAllJobOffers() {
     // joonista HTML element iga taski jaoks
-    data.forEach((job) => {
+    filteredData.forEach((job) => {
         jobOfferContainer(job);
     });
 }
@@ -222,11 +252,11 @@ function getLevel(job) {
 function getLanguages(job) {
     const langagesWrapperEl = document.createElement("div");
     langagesWrapperEl.className = "wrapper"
-    job.languages.forEach((language) => {
+    jobOffer.languages.forEach((jobOffer.language) => {
         const languagesTagEl = document.createElement("div");
         languagesTagEl.className = "jobDetailTag"
-        languagesTagEl.setAttribute("tagTitle", `${language}`);
-        languagesTagEl.innerHTML = `${language}`;
+        languagesTagEl.setAttribute("tagTitle", `${jobOffer.language}`);
+        languagesTagEl.innerHTML = `${jobOffer.language}`;
         langagesWrapperEl.append(languagesTagEl);
     })
 
@@ -273,59 +303,64 @@ function createFilterTag(filterTitleEl) {
 
 // vali köik filter IDga elemendid
 const filters = document.querySelectorAll("#filter");
-// pane igaühele neist...
-filters.forEach(filter => {
-    // ...külge click funktsioon
-    filter.addEventListener('click', function (event) {
+// // pane igaühele neist...
+// filters.forEach(filter => {
+//     // ...külge click funktsioon
+//     filter.addEventListener('click', function (event) {
+//         // võta filtririba element
+//         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+//         // saa teada tekst klikitud nupul
+//         const filterTitleEl = event.target.textContent;
+//         // loo filter
+//         const filter = createFilterTag(filterTitleEl)
+//         // kui klikitud button oli juba aktiivne...
+//         if (this.classList.contains("activeFilter")){
+//             // ...dektiveeri see
+//             this.classList.remove("activeFilter")
+//             // ja eemalda nupp filtriribalt
+//             chosenFilterTagsEl.removeChild(filter);
+//         // kui aga nupp pole aktiivne...
+//         } else {
+//             // ...siis aktiveeri see
+//             this.classList.add("activeFilter")
+//             // ja tekita filtriribale sellele vastav nupp
+//             chosenFilterTagsEl.append(filter)
+//         }
+//     })
+// });
 
-        const filterTitleEl = event.target.textContent;
-        const jobOffersToHide = document.querySelectorAll(`.jobOffer .jobDetailTags .jobDetailTag:not([tagtitle='${filterTitleEl}'])`);
-        const jobOffersToShow = document.querySelectorAll(`.jobOffer [tagtitle='${filterTitleEl}']`);
+// const filtersListEl = document.querySelectorAll(".filter")
 
-        jobOffersToHide.forEach(el => {
-            el.classList.add('hide');
-            el.classList.remove('show');
-        });
-      
-          jobOffersToShow.forEach(el => {
-            el.classList.remove('hide');
-            el.classList.add('show'); 
-          });
+// filtersListEl.foreach(filter => filter.onclick = onFilterClick)
 
-        // võta filtririba element
-        const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-        // const filterTitleEl = event.target.textContent;
-        const filter = createFilterTag(filterTitleEl)
-        // kui klikitud button oli juba aktiivne...
-        if (this.classList.contains("activeFilter")){
-            // ...dektiveeri see
-            this.classList.remove("activeFilter")
-            // ja eemalda nupp filtriribalt
-            chosenFilterTagsEl.parentNode.removeChild(filter);
-        // kui aga nupp pole aktiivne...
-        } else {
-            // ...siis aktiveeri see
-            this.classList.add("activeFilter")
-            // ja tekita filtriribale sellele vastav nupp
-            chosenFilterTagsEl.append(filter)
-        }
-    })
-});
-
-
-// const filtersNodeListEl = document.querySelectorAll(".filter")
-
-// filtersNodeListEl.forEach(filter => {
-//     console.log('filter', filter)
+// filtersListEl.forEach(filter => {
+//     // ...külge click funktsioon
+//     filter.addEventListener('click', function (event) {
+//         // võta filtririba element
+//         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+//         // saa teada tekst klikitud nupul
+//         const filterTitleEl = event.target.textContent;
+//         // loo filter
+//         const filter = createFilterTag(filterTitleEl)
+//         // kui klikitud button oli juba aktiivne...
+//         if (this.classList.contains("activeFilter")){
+//             // ...dektiveeri see
+//             this.classList.remove("activeFilter")
+//             // ja eemalda nupp filtriribalt
+//             chosenFilterTagsEl.removeChild(filter);
+//         // kui aga nupp pole aktiivne...
+//         } else {
+//             // ...siis aktiveeri see
+//             this.classList.add("activeFilter")
+//             // ja tekita filtriribale sellele vastav nupp
+//             chosenFilterTagsEl.append(filter)
+//         }
+//     })
+//     // filter.onclick = onFilterClick
 // })
 
-
-// const filters = Array.from(filtersNodeListEl);
-// console.log(filters)
+// const filters = Array.from(filtersListEl);
 
 // const filter = Object.assign({}, filters)
-// console.log(filter)
-
-// console.log(document.querySelectorAll(".filter"))
 
 showAllJobOffers();
