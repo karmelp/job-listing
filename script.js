@@ -116,16 +116,18 @@ function jobOfferContainer(job) {
     const jobDetailTagsEl = document.createElement("div")
     // lisa tagide konteinerile klass
     jobDetailTagsEl.setAttribute("class", "jobDetailTags")
-    // võta role tag getRole funktsioonist
-    const roleTagEl = getRole(job);
-    // võta level tag getLevel funktsioonist
-    const levelTagEl = getLevel(job);
-    // võta keelte tag getLanguages funktsioonist
-    const languagesTagEl = getLanguages(job)
-    // võta tools tag getTools funktsioonist
-    const toolsTagEl = getTools(job)
+
+    const getFiltersEl = getFilters(job);
+    // // võta role tag getRole funktsioonist
+    // const roleTagEl = getRole(job);
+    // // võta level tag getLevel funktsioonist
+    // const levelTagEl = getLevel(job);
+    // // võta keelte tag getLanguages funktsioonist
+    // const languagesTagEl = getLanguages(job)
+    // // võta tools tag getTools funktsioonist
+    // const toolsTagEl = getTools(job)
     // pane tagid töö detaili tagide konteineri sisse 
-    jobDetailTagsEl.append(roleTagEl, levelTagEl, languagesTagEl, toolsTagEl)
+    jobDetailTagsEl.append(getFiltersEl)
     // pane postituse aeg, ring1, leping, ring2 ja asukoht alaminfo konteineri sisse
     subInfoEl.append(postedAtEl, circleOne, contractEl, circleTwo, locationEl)
     // pane firma nimi, new tag ja featured tag firma nime, featured & new tagi konteineri sisse
@@ -234,54 +236,67 @@ function getsvgCircle() {
     return svg1;
 }
 
-function getRole(job) {
-    const roleTagEl = document.createElement("div");
-    roleTagEl.className = "jobDetailTag"
-    roleTagEl.setAttribute("tagTitle", `${job.role}`);
-    roleTagEl.innerHTML = `${job.role}`;
-    return roleTagEl;
-}
-function getLevel(job) {
-    const levelTagEl = document.createElement("div");
-    levelTagEl.className = "jobDetailTag"
-    levelTagEl.setAttribute("tagTitle", `${job.level}`);
-    levelTagEl.innerHTML = `${job.level}`;
-    return levelTagEl;
-
-}
-function getLanguages(job) {
-    const langagesWrapperEl = document.createElement("div");
-    langagesWrapperEl.className = "wrapper"
-    jobOffer.languages.forEach((jobOffer.language) => {
-        const languagesTagEl = document.createElement("div");
-        languagesTagEl.className = "jobDetailTag"
-        languagesTagEl.setAttribute("tagTitle", `${jobOffer.language}`);
-        languagesTagEl.innerHTML = `${jobOffer.language}`;
-        langagesWrapperEl.append(languagesTagEl);
+function getFilters(job) {
+    const filtersWrapperEl = document.createElement("div");
+    filtersWrapperEl.className = "wrapper"
+    job.filters.forEach((filter) => {
+        const filterTagEl = document.createElement("div");
+        filterTagEl.className = "jobDetailTag"
+        filterTagEl.setAttribute("tagTitle", `${job.filter}`);
+        filterTagEl.innerHTML = `${job.filter}`;
+        filtersWrapperEl.append(filterTagEl);
     })
-
-    return langagesWrapperEl;
+    return filtersWrapperEl;
 }
 
+// function getRole(job) {
+//     const roleTagEl = document.createElement("div");
+//     roleTagEl.className = "jobDetailTag"
+//     roleTagEl.setAttribute("tagTitle", `${job.role}`);
+//     roleTagEl.innerHTML = `${job.role}`;
+//     return roleTagEl;
+// }
+// function getLevel(job) {
+//     const levelTagEl = document.createElement("div");
+//     levelTagEl.className = "jobDetailTag"
+//     levelTagEl.setAttribute("tagTitle", `${job.level}`);
+//     levelTagEl.innerHTML = `${job.level}`;
+//     return levelTagEl;
 
-function getTools(job) {
-    if (job.tools.length !== 0) {
-        const toolsWrapperEl = document.createElement("div");
-        toolsWrapperEl.className = "wrapper"
+// }
+// function getLanguages(job) {
+//     const langagesWrapperEl = document.createElement("div");
+//     langagesWrapperEl.className = "wrapper"
+//     languages.forEach((language) => {
+//         const languagesTagEl = document.createElement("div");
+//         languagesTagEl.className = "jobDetailTag"
+//         languagesTagEl.setAttribute("tagTitle", `${language}`);
+//         languagesTagEl.innerHTML = `${language}`;
+//         langagesWrapperEl.append(languagesTagEl);
+//     })
 
-        job.tools.forEach((tool) => {
-            const toolsTagEl = document.createElement("div");
-            toolsTagEl.className = "jobDetailTag";
-            toolsTagEl.setAttribute("tagTitle", `${tool}`);
-            toolsTagEl.innerHTML = `${tool}`;
-            toolsWrapperEl.append(toolsTagEl);
-        })
+//     return langagesWrapperEl;
+// }
 
-        return toolsWrapperEl;
-    } else {
-        return '';
-    }
-}
+
+// function getTools(job) {
+//     if (job.tools.length !== 0) {
+//         const toolsWrapperEl = document.createElement("div");
+//         toolsWrapperEl.className = "wrapper"
+
+//         job.tools.forEach((tool) => {
+//             const toolsTagEl = document.createElement("div");
+//             toolsTagEl.className = "jobDetailTag";
+//             toolsTagEl.setAttribute("tagTitle", `${tool}`);
+//             toolsTagEl.innerHTML = `${tool}`;
+//             toolsWrapperEl.append(toolsTagEl);
+//         })
+
+//         return toolsWrapperEl;
+//     } else {
+//         return '';
+//     }
+// }
 
 function createFilterTag(filterTitleEl) {
     // const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
