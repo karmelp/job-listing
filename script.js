@@ -274,10 +274,15 @@ function createFilterTag(filterTitleEl) {
             if (this.classList.contains("activeFilter")){
                 // ...dektiveeri see
                 this.classList.remove("activeFilter")
-                // ja eemalda nupp filtriribalt
-                chosenFilterTagsEl.remove(filter);
-                // lisa filter activeFilters arraysse
-                activeFilters.splice(filterTitleEl, 1);
+                // eemalda filter filtririvalt
+                activeFilters.map((filter) => {
+                        // uuri välja selle index arrays
+                        const deleteIndex = activeFilters.indexOf(filter);
+                        console.log('deleted', deleteIndex)
+                        // ja eemalda see
+                        activeFilters.splice(deleteIndex,1);
+                });
+                console.log(activeFilters)
             // kui aga nupp pole aktiivne...
             } else {
                 // ...siis aktiveeri see
