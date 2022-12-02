@@ -13,10 +13,10 @@ const normalizedJobOffers = data.map((jobOffer) => {
       location: jobOffer.location,
       // kolm täppi (...), sest tools ja languages on arrayd ja me ei taha, et array sees oleks array.
       filters: [
+        jobOffer.role,
         jobOffer.level,
-        jobOffer.languages,
-        ...jobOffer.tools,
         ...jobOffer.languages,
+        ...jobOffer.tools,
       ],
     };
   });
@@ -242,8 +242,8 @@ function getFilters(job) {
     job.filters.forEach((filter) => {
         const filterTagEl = document.createElement("div");
         filterTagEl.className = "jobDetailTag"
-        filterTagEl.setAttribute("tagTitle", `${job.filter}`);
-        filterTagEl.innerHTML = `${job.filter}`;
+        filterTagEl.setAttribute("tagTitle", `${filter}`);
+        filterTagEl.innerHTML = `${filter}`;
         filtersWrapperEl.append(filterTagEl);
     })
     return filtersWrapperEl;
