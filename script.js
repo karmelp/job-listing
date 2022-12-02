@@ -270,12 +270,13 @@ function createFilterTag(filterTitleEl) {
             const filterTitleEl = event.target.textContent;
             // loo filter
             const filter = createFilterTag(filterTitleEl)
-
             // kui klikitud button oli juba aktiivne...
             if (this.classList.contains("activeFilter")){
                 // ...dektiveeri see menüüs
                 this.classList.remove("activeFilter")
-                // eemalda filter activeFilters arrayst
+                // eemalda filter filtriribalt...
+                chosenFilterTagsEl.removeChild(filter)
+                // ...ja ka activeFilters arrayst
                 activeFilters.map((filter) => {
                     if (filter === filterTitleEl) {
                         // uuri välja selle index arrays
@@ -284,10 +285,6 @@ function createFilterTag(filterTitleEl) {
                         activeFilters.splice(deleteIndex,1);
                     }
                 });
-            // ja ka filtriribalt
-            chosenFilterTagsEl.removeChild(filter)
-
-                console.log(activeFilters)
             // kui aga nupp pole aktiivne...
             } else {
                 // ...siis aktiveeri see menüüs
@@ -296,7 +293,6 @@ function createFilterTag(filterTitleEl) {
                 chosenFilterTagsEl.append(filter)
                 // lisa filter activeFilters arraysse
                 activeFilters.push(filterTitleEl)
-                console.log(activeFilters)
             }
 
         })
