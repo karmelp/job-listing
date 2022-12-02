@@ -274,8 +274,8 @@ function createFilterTag(filterTitleEl) {
             if (this.classList.contains("activeFilter")){
                 // ...dektiveeri see
                 this.classList.remove("activeFilter")
-                // // ja eemalda nupp filtriribalt
-                // chosenFilterTagsEl.removeChild(filter);
+                // ja eemalda nupp filtriribalt
+                chosenFilterTagsEl.remove(filter);
                 // lisa filter activeFilters arraysse
                 activeFilters.splice(filterTitleEl, 1);
             // kui aga nupp pole aktiivne...
