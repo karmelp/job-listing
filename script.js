@@ -116,16 +116,8 @@ function jobOfferContainer(job) {
     const jobDetailTagsEl = document.createElement("div")
     // lisa tagide konteinerile klass
     jobDetailTagsEl.setAttribute("class", "jobDetailTags")
-
+    // võta filter tag getFilters funktsioonist
     const getFiltersEl = getFilters(job);
-    // // võta role tag getRole funktsioonist
-    // const roleTagEl = getRole(job);
-    // // võta level tag getLevel funktsioonist
-    // const levelTagEl = getLevel(job);
-    // // võta keelte tag getLanguages funktsioonist
-    // const languagesTagEl = getLanguages(job)
-    // // võta tools tag getTools funktsioonist
-    // const toolsTagEl = getTools(job)
     // pane tagid töö detaili tagide konteineri sisse 
     jobDetailTagsEl.append(getFiltersEl)
     // pane postituse aeg, ring1, leping, ring2 ja asukoht alaminfo konteineri sisse
@@ -249,55 +241,6 @@ function getFilters(job) {
     return filtersWrapperEl;
 }
 
-// function getRole(job) {
-//     const roleTagEl = document.createElement("div");
-//     roleTagEl.className = "jobDetailTag"
-//     roleTagEl.setAttribute("tagTitle", `${job.role}`);
-//     roleTagEl.innerHTML = `${job.role}`;
-//     return roleTagEl;
-// }
-// function getLevel(job) {
-//     const levelTagEl = document.createElement("div");
-//     levelTagEl.className = "jobDetailTag"
-//     levelTagEl.setAttribute("tagTitle", `${job.level}`);
-//     levelTagEl.innerHTML = `${job.level}`;
-//     return levelTagEl;
-
-// }
-// function getLanguages(job) {
-//     const langagesWrapperEl = document.createElement("div");
-//     langagesWrapperEl.className = "wrapper"
-//     languages.forEach((language) => {
-//         const languagesTagEl = document.createElement("div");
-//         languagesTagEl.className = "jobDetailTag"
-//         languagesTagEl.setAttribute("tagTitle", `${language}`);
-//         languagesTagEl.innerHTML = `${language}`;
-//         langagesWrapperEl.append(languagesTagEl);
-//     })
-
-//     return langagesWrapperEl;
-// }
-
-
-// function getTools(job) {
-//     if (job.tools.length !== 0) {
-//         const toolsWrapperEl = document.createElement("div");
-//         toolsWrapperEl.className = "wrapper"
-
-//         job.tools.forEach((tool) => {
-//             const toolsTagEl = document.createElement("div");
-//             toolsTagEl.className = "jobDetailTag";
-//             toolsTagEl.setAttribute("tagTitle", `${tool}`);
-//             toolsTagEl.innerHTML = `${tool}`;
-//             toolsWrapperEl.append(toolsTagEl);
-//         })
-
-//         return toolsWrapperEl;
-//     } else {
-//         return '';
-//     }
-// }
-
 function createFilterTag(filterTitleEl) {
     // const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
     const filterTagEl = document.createElement("li")
@@ -316,37 +259,37 @@ function createFilterTag(filterTitleEl) {
     return filterTagEl;
 }
 
-// vali köik filter IDga elemendid
-const filters = document.querySelectorAll("#filter");
-// // pane igaühele neist...
-// filters.forEach(filter => {
-//     // ...külge click funktsioon
-//     filter.addEventListener('click', function (event) {
-//         // võta filtririba element
-//         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-//         // saa teada tekst klikitud nupul
-//         const filterTitleEl = event.target.textContent;
-//         // loo filter
-//         const filter = createFilterTag(filterTitleEl)
-//         // kui klikitud button oli juba aktiivne...
-//         if (this.classList.contains("activeFilter")){
-//             // ...dektiveeri see
-//             this.classList.remove("activeFilter")
-//             // ja eemalda nupp filtriribalt
-//             chosenFilterTagsEl.removeChild(filter);
-//         // kui aga nupp pole aktiivne...
-//         } else {
-//             // ...siis aktiveeri see
-//             this.classList.add("activeFilter")
-//             // ja tekita filtriribale sellele vastav nupp
-//             chosenFilterTagsEl.append(filter)
-//         }
-//     })
-// });
+function onFilterClick () {
+    // vali köik filter IDga elemendid
+    const filters = document.querySelectorAll("#filter");
+    // pane igaühele neist...
+    filters.forEach(filter => {
+        // ...külge click funktsioon
+        filter.addEventListener('click', function (event) {
+            // võta filtririba element
+            const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+            // saa teada tekst klikitud nupul
+            const filterTitleEl = event.target.textContent;
+            // loo filter
+            const filter = createFilterTag(filterTitleEl)
+            // kui klikitud button oli juba aktiivne...
+            if (this.classList.contains("activeFilter")){
+                // ...dektiveeri see
+                this.classList.remove("activeFilter")
+                // ja eemalda nupp filtriribalt
+                chosenFilterTagsEl.removeChild(filter);
+            // kui aga nupp pole aktiivne...
+            } else {
+                // ...siis aktiveeri see
+                this.classList.add("activeFilter")
+                // ja tekita filtriribale sellele vastav nupp
+                chosenFilterTagsEl.append(filter)
+            }
+        });
+    });
+}
 
-// const filtersListEl = document.querySelectorAll(".filter")
-
-// filtersListEl.foreach(filter => filter.onclick = onFilterClick)
+document.querySelectorAll(".filter").onclick = onFilterClick();
 
 // filtersListEl.forEach(filter => {
 //     // ...külge click funktsioon
