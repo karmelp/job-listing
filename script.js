@@ -259,13 +259,11 @@ function createFilterTag(filterTitleEl) {
     return filterTagEl;
 }
 
-function onFilterClick () {
     // vali köik filter IDga elemendid
     const filters = document.querySelectorAll("#filter");
-    // pane igaühele neist...
+
     filters.forEach(filter => {
-        // ...külge click funktsioon
-        filter.addEventListener('click', function (event) {
+        filter.addEventListener('click', function onFilterClick(event) {
             // võta filtririba element
             const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
             // saa teada tekst klikitud nupul
@@ -276,49 +274,47 @@ function onFilterClick () {
             if (this.classList.contains("activeFilter")){
                 // ...dektiveeri see
                 this.classList.remove("activeFilter")
-                // ja eemalda nupp filtriribalt
-                chosenFilterTagsEl.removeChild(filter);
+                // // ja eemalda nupp filtriribalt
+                // chosenFilterTagsEl.removeChild(filter);
+                // lisa filter activeFilters arraysse
+                activeFilters.splice(filterTitleEl, 1);
             // kui aga nupp pole aktiivne...
             } else {
                 // ...siis aktiveeri see
                 this.classList.add("activeFilter")
                 // ja tekita filtriribale sellele vastav nupp
                 chosenFilterTagsEl.append(filter)
+                // lisa filter activeFilters arraysse
+                activeFilters.push(filterTitleEl)
+                console.log(activeFilters)
             }
-        });
-    });
-}
 
-document.querySelectorAll(".filter").onclick = onFilterClick();
-
-// filtersListEl.forEach(filter => {
-//     // ...külge click funktsioon
-//     filter.addEventListener('click', function (event) {
-//         // võta filtririba element
-//         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-//         // saa teada tekst klikitud nupul
-//         const filterTitleEl = event.target.textContent;
-//         // loo filter
-//         const filter = createFilterTag(filterTitleEl)
-//         // kui klikitud button oli juba aktiivne...
-//         if (this.classList.contains("activeFilter")){
-//             // ...dektiveeri see
-//             this.classList.remove("activeFilter")
-//             // ja eemalda nupp filtriribalt
-//             chosenFilterTagsEl.removeChild(filter);
-//         // kui aga nupp pole aktiivne...
-//         } else {
-//             // ...siis aktiveeri see
-//             this.classList.add("activeFilter")
-//             // ja tekita filtriribale sellele vastav nupp
-//             chosenFilterTagsEl.append(filter)
-//         }
-//     })
-//     // filter.onclick = onFilterClick
-// })
-
-// const filters = Array.from(filtersListEl);
-
-// const filter = Object.assign({}, filters)
+        })
+    })
+    // // pane igaühele neist...
+    // filters.forEach(filter => {
+    //     // ...külge click funktsioon
+    //     filter.addEventListener('click', function (event) {
+    //         // võta filtririba element
+    //         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    //         // saa teada tekst klikitud nupul
+    //         const filterTitleEl = event.target.textContent;
+    //         // loo filter
+    //         const filter = createFilterTag(filterTitleEl)
+    //         // kui klikitud button oli juba aktiivne...
+    //         if (this.classList.contains("activeFilter")){
+    //             // ...dektiveeri see
+    //             this.classList.remove("activeFilter")
+    //             // ja eemalda nupp filtriribalt
+    //             chosenFilterTagsEl.removeChild(filter);
+    //         // kui aga nupp pole aktiivne...
+    //         } else {
+    //             // ...siis aktiveeri see
+    //             this.classList.add("activeFilter")
+    //             // ja tekita filtriribale sellele vastav nupp
+    //             chosenFilterTagsEl.append(filter)
+    //         }
+    //     });
+    // });
 
 showAllJobOffers();
