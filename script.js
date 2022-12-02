@@ -270,22 +270,27 @@ function createFilterTag(filterTitleEl) {
             const filterTitleEl = event.target.textContent;
             // loo filter
             const filter = createFilterTag(filterTitleEl)
+
             // kui klikitud button oli juba aktiivne...
             if (this.classList.contains("activeFilter")){
-                // ...dektiveeri see
+                // ...dektiveeri see menüüs
                 this.classList.remove("activeFilter")
-                // eemalda filter filtririvalt
+                // eemalda filter activeFilters arrayst
                 activeFilters.map((filter) => {
+                    if (filter === filterTitleEl) {
                         // uuri välja selle index arrays
                         const deleteIndex = activeFilters.indexOf(filter);
-                        console.log('deleted', deleteIndex)
                         // ja eemalda see
                         activeFilters.splice(deleteIndex,1);
+                    }
                 });
+            // ja ka filtriribalt
+            chosenFilterTagsEl.removeChild(filter)
+
                 console.log(activeFilters)
             // kui aga nupp pole aktiivne...
             } else {
-                // ...siis aktiveeri see
+                // ...siis aktiveeri see menüüs
                 this.classList.add("activeFilter")
                 // ja tekita filtriribale sellele vastav nupp
                 chosenFilterTagsEl.append(filter)
