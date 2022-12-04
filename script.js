@@ -242,8 +242,6 @@ function getFilters(job) {
 }
 
 function createFilterTag(activeFilter) {
-    // võta filtririba element
-    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
         const filterTagEl = document.createElement("li")
         filterTagEl.className = "filterTag";
         filterTagEl.setAttribute("filterTitle", activeFilter);
@@ -254,13 +252,15 @@ function createFilterTag(activeFilter) {
         filterTagIconEl.className = "filterTagIcon";
         filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'   
         filterTagEl.append(filterTagTitleEl, filterTagIconEl)
-        chosenFilterTagsEl.append(filterTagEl)
         return filterTagEl;
 }
 
 function drawSelectedFilters() {
+    // võta filtririba element
+    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    chosenFilterTagsEl.innerHTML = ""
     activeFilters.forEach((activeFilter) => {
-        createFilterTag(activeFilter)
+        chosenFilterTagsEl.append(createFilterTag(activeFilter))
     })
 }
 
@@ -276,9 +276,9 @@ filters.forEach(filter => {
             // ...dektiveeri see menüüs
             this.classList.remove("activeFilter")
             // // eemalda filter filtriribalt...
-            // chosenFilterTagsEl.remove()
+            onFilterTagClick()
             // ...ja ka activeFilters arrayst
-            removeActiveFilter(filterTitleEl)
+            removeActiveFilter()
         } else {
             // aktiveeri sellel nupul activefilters classlist
             this.classList.add("activeFilter")
@@ -292,18 +292,25 @@ filters.forEach(filter => {
    })
 })
 
+// vali köik filterTag elemendid
+const filterTags = document.querySelectorAll(".filterTag");
+    filterTags.forEach(filterTag => {
+        filterTag.addEventListener('click', function onFilterTagClick(event) {
+            // saa teada tekst klikitud nupul
+            const filterTagEl = event.target.textContent;
+            activeFilters.splice(filterTagEl,1);
+            console.log(activeFilters)
+        })
+    })
+
 
 // eemalda filter aktiivsete filtrite arrayst
-function removeActiveFilter(filterTitleEl) {
-    activeFilters.map((filter) => {
-        if (filter === filterTitleEl) {
-            // uuri välja selle index arrays
+function removeActiveFilter() {
+    // uuri välja selle index arrays
             const deleteIndex = activeFilters.indexOf(filter);
             // ja eemalda see
             activeFilters.splice(deleteIndex,1);
             console.log(activeFilters)
-        }
-    });
 }
     // filters.forEach(filter => {
     //     filter.addEventListener('click', function onFilterClick(event) {
