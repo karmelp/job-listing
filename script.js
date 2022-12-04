@@ -251,7 +251,7 @@ function createFilterTag(activeFilter) {
         const filterTagIconEl = document.createElement("div")
         filterTagIconEl.className = "filterTagIcon";
         filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'  
-        filterTagIconEl.onclick = () => onFilterTagClick(activeFilter, filterTagEl); 
+        filterTagEl.onclick = () => onFilterTagClick(activeFilter, filterTagEl); 
         filterTagEl.append(filterTagTitleEl, filterTagIconEl)
         return filterTagEl;
 }
@@ -287,7 +287,7 @@ filters.forEach(filter => {
             activeFilters.push(filterTitleEl);
             // ja tekita filtriribale sellele vastav nupp
             drawSelectedFilters()
-            console.log(activeFilters)
+            console.log('filterForEachElse', activeFilters)
         }
    })
 })
@@ -295,9 +295,9 @@ filters.forEach(filter => {
 function onFilterTagClick(activeFilter, filterTagEl) {
     if (filterTagEl.textContent == activeFilter) {
         filterTagEl.remove()
-        console.log(activeFilters)
     }
     removeActiveFilter()
+    console.log('onFilterTagClick', activeFilters)
 }
 
 // eemalda filter aktiivsete filtrite arrayst
@@ -306,6 +306,7 @@ function removeActiveFilter() {
     const deleteIndex = activeFilters.indexOf(filter);
     // ja eemalda see
     activeFilters.splice(deleteIndex,1);
+    console.log('removeActiveFilter', activeFilters)
 }
     // filters.forEach(filter => {
     //     filter.addEventListener('click', function onFilterClick(event) {
