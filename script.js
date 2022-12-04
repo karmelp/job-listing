@@ -23,7 +23,7 @@ const normalizedJobOffers = data.map((jobOffer) => {
 
 const buttonEl = document.querySelector(".filterBtnIcon")
 const filterPanelEl = document.querySelector(".filtersPanel")
-let activeFilters = [];
+let activeFilters = ["Ruby"];
 
 document.querySelector(".filterBtn").addEventListener('mouseenter', () => {
     if (filterPanelEl.style.visibility === "hidden") { 
@@ -241,62 +241,109 @@ function getFilters(job) {
     return filtersWrapperEl;
 }
 
-function createFilterTag(filterTitleEl) {
-    // const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-    const filterTagEl = document.createElement("li")
-    filterTagEl.className = "filterTag";
-    filterTagEl.setAttribute("filterTitle", filterTitleEl);
-    const filterTagTitleEl = document.createElement("h2")
-    filterTagTitleEl.className = "filterTagTitle"
-    filterTagTitleEl.innerHTML = filterTitleEl;
-    const filterTagIconEl = document.createElement("div")
-    filterTagIconEl.className = "filterTagIcon";
-    filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'
-            
-    filterTagEl.append(filterTagTitleEl, filterTagIconEl)
-    // chosenFilterTagsEl.append(filterTagEl)
-
-    return filterTagEl;
+function createFilterTag(activeFilter) {
+        const filterTagEl = document.createElement("li")
+        filterTagEl.className = "filterTag";
+        filterTagEl.setAttribute("filterTitle", activeFilter);
+        const filterTagTitleEl = document.createElement("h2")
+        filterTagTitleEl.className = "filterTagTitle"
+        filterTagTitleEl.innerHTML = activeFilter;
+        const filterTagIconEl = document.createElement("div")
+        filterTagIconEl.className = "filterTagIcon";
+        filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'   
+        filterTagEl.append(filterTagTitleEl, filterTagIconEl)
+        return filterTagEl;
 }
 
-    // vali köik filter IDga elemendid
-    const filters = document.querySelectorAll("#filter");
-
-    filters.forEach(filter => {
-        filter.addEventListener('click', function onFilterClick(event) {
-            // võta filtririba element
-            const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-            // saa teada tekst klikitud nupul
-            const filterTitleEl = event.target.textContent;
-            // loo filter
-            const filter = createFilterTag(filterTitleEl)
-            // kui klikitud button oli juba aktiivne...
-            if (this.classList.contains("activeFilter")){
-                // ...dektiveeri see menüüs
-                this.classList.remove("activeFilter")
-                // eemalda filter filtriribalt...
-                chosenFilterTagsEl.removeChild(filter)
-                // ...ja ka activeFilters arrayst
-                activeFilters.map((filter) => {
-                    if (filter === filterTitleEl) {
-                        // uuri välja selle index arrays
-                        const deleteIndex = activeFilters.indexOf(filter);
-                        // ja eemalda see
-                        activeFilters.splice(deleteIndex,1);
-                    }
-                });
-            // kui aga nupp pole aktiivne...
-            } else {
-                // ...siis aktiveeri see menüüs
-                this.classList.add("activeFilter")
-                // ja tekita filtriribale sellele vastav nupp
-                chosenFilterTagsEl.append(filter)
-                // lisa filter activeFilters arraysse
-                activeFilters.push(filterTitleEl)
-            }
-
-        })
+function drawSelectedFilters() {
+    // võta filtririba element
+    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    activeFilters.forEach((activeFilter) => {
+        chosenFilterTagsEl.append(createFilterTag(activeFilter))
     })
+}
+
+// vali köik filter IDga elemendid
+const filters = document.querySelectorAll("#filter");
+
+filters.forEach(filter => {
+    filter.addEventListener('click', function onFilterClick(event) {
+        // saa teada tekst klikitud nupul
+        const filterTitleEl = event.target.textContent;
+        // kui klikitud button oli juba aktiivne...
+        if (this.classList.contains("activeFilter")){
+            // ...dektiveeri see menüüs
+            this.classList.remove("activeFilter")
+            // // eemalda filter filtriribalt...
+            // chosenFilterTagsEl.remove()
+            // ...ja ka activeFilters arrayst
+            removeActiveFilter(filterTitleEl)
+        } else {
+            // aktiveeri sellel nupul activefilters classlist
+            this.classList.add("activeFilter")
+            // lisa filter activeFilters arraysse
+            activeFilters.push(filterTitleEl);
+            // ja tekita filtriribale sellele vastav nupp
+            drawSelectedFilters()
+
+            console.log(activeFilters)
+        }
+   })
+})
+
+
+// eemalda filter aktiivsete filtrite arrayst
+function removeActiveFilter(filterTitleEl) {
+    activeFilters.map((filter) => {
+        if (filter === filterTitleEl) {
+            // uuri välja selle index arrays
+            const deleteIndex = activeFilters.indexOf(filter);
+            // ja eemalda see
+            activeFilters.splice(deleteIndex,1);
+            console.log(activeFilters)
+        }
+    });
+}
+    // filters.forEach(filter => {
+    //     filter.addEventListener('click', function onFilterClick(event) {
+    //         // võta filtririba element
+    //         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    //         // saa teada tekst klikitud nupul
+    //         const filterTitleEl = event.target.textContent;
+    //         // loo filter
+    //         const filter = createFilterTag(filterTitleEl)
+    //         // kui klikitud button oli juba aktiivne...
+    //         if (this.classList.contains("activeFilter")){
+    //             // ...dektiveeri see menüüs
+    //             this.classList.remove("activeFilter")
+    //             // // eemalda filter filtriribalt...
+    //             // chosenFilterTagsEl.remove()
+    //             // ...ja ka activeFilters arrayst
+    //             activeFilters.map((filter) => {
+    //                 if (filter === filterTitleEl) {
+    //                     // uuri välja selle index arrays
+    //                     const deleteIndex = activeFilters.indexOf(filter);
+    //                     // ja eemalda see
+    //                     activeFilters.splice(deleteIndex,1);
+    //                     console.log(activeFilters)
+    //                 }
+    //             });
+    //         // kui aga nupp pole aktiivne...
+    //         } else {
+    //             // ...siis aktiveeri see menüüs
+    //             this.classList.add("activeFilter")
+    //             // ja tekita filtriribale sellele vastav nupp
+    //             chosenFilterTagsEl.append(filter)
+    //             // lisa filter activeFilters arraysse
+    //             activeFilters.push(filterTitleEl)
+    //             console.log(activeFilters)
+    //         }
+
+    //     })
+    // })
+
+
+
     // // pane igaühele neist...
     // filters.forEach(filter => {
     //     // ...külge click funktsioon
