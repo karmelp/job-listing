@@ -23,7 +23,7 @@ const normalizedJobOffers = data.map((jobOffer) => {
 
 const buttonEl = document.querySelector(".filterBtnIcon")
 const filterPanelEl = document.querySelector(".filtersPanel")
-let activeFilters = ["Ruby"];
+let activeFilters = [];
 
 document.querySelector(".filterBtn").addEventListener('mouseenter', () => {
     if (filterPanelEl.style.visibility === "hidden") { 
@@ -242,6 +242,8 @@ function getFilters(job) {
 }
 
 function createFilterTag(activeFilter) {
+    // võta filtririba element
+    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
         const filterTagEl = document.createElement("li")
         filterTagEl.className = "filterTag";
         filterTagEl.setAttribute("filterTitle", activeFilter);
@@ -252,14 +254,13 @@ function createFilterTag(activeFilter) {
         filterTagIconEl.className = "filterTagIcon";
         filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'   
         filterTagEl.append(filterTagTitleEl, filterTagIconEl)
+        chosenFilterTagsEl.append(filterTagEl)
         return filterTagEl;
 }
 
 function drawSelectedFilters() {
-    // võta filtririba element
-    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
     activeFilters.forEach((activeFilter) => {
-        chosenFilterTagsEl.append(createFilterTag(activeFilter))
+        createFilterTag(activeFilter)
     })
 }
 
