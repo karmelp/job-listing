@@ -250,7 +250,8 @@ function createFilterTag(activeFilter) {
         filterTagTitleEl.innerHTML = activeFilter;
         const filterTagIconEl = document.createElement("div")
         filterTagIconEl.className = "filterTagIcon";
-        filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'   
+        filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'  
+        filterTagIconEl.onclick = () => onFilterTagClick(activeFilter, filterTagEl); 
         filterTagEl.append(filterTagTitleEl, filterTagIconEl)
         return filterTagEl;
 }
@@ -286,33 +287,25 @@ filters.forEach(filter => {
             activeFilters.push(filterTitleEl);
             // ja tekita filtriribale sellele vastav nupp
             drawSelectedFilters()
-
             console.log(activeFilters)
         }
    })
 })
 
-// vali köik filterTag elemendid
-const filterTags = document.querySelectorAll(".filterTag");
-    filterTags.forEach(filterTag => {
-        filterTag.addEventListener('click', function onFilterTagClick(event) {
-            // saa teada tekst klikitud nupul
-            const filterTagEl = event.target.textContent;
-            if (activeFilter == filterTagEl) {
-                activeFilters.splice(filterTag,1);
-                console.log("miki", activeFilters)
-            }
-        })
-    })
-
+function onFilterTagClick(activeFilter, filterTagEl) {
+    if (filterTagEl.textContent == activeFilter) {
+        filterTagEl.remove()
+        console.log(activeFilters)
+    }
+    removeActiveFilter()
+}
 
 // eemalda filter aktiivsete filtrite arrayst
 function removeActiveFilter() {
     // uuri välja selle index arrays
-            const deleteIndex = activeFilters.indexOf(filter);
-            // ja eemalda see
-            activeFilters.splice(deleteIndex,1);
-            console.log(activeFilters)
+    const deleteIndex = activeFilters.indexOf(filter);
+    // ja eemalda see
+    activeFilters.splice(deleteIndex,1);
 }
     // filters.forEach(filter => {
     //     filter.addEventListener('click', function onFilterClick(event) {
