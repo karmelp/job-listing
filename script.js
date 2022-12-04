@@ -275,8 +275,8 @@ filters.forEach(filter => {
         if (this.classList.contains("activeFilter")){
             // ...dektiveeri see menüüs
             this.classList.remove("activeFilter")
-            // // eemalda filter filtriribalt...
-            onFilterTagClick()
+            // // // eemalda filter filtriribalt...
+            // onFilterTagClick()
             // ...ja ka activeFilters arrayst
             removeActiveFilter()
         } else {
@@ -298,8 +298,10 @@ const filterTags = document.querySelectorAll(".filterTag");
         filterTag.addEventListener('click', function onFilterTagClick(event) {
             // saa teada tekst klikitud nupul
             const filterTagEl = event.target.textContent;
-            activeFilters.splice(filterTagEl,1);
-            console.log(activeFilters)
+            if (activeFilter == filterTagEl) {
+                activeFilters.splice(filterTag,1);
+                console.log("miki", activeFilters)
+            }
         })
     })
 
