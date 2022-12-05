@@ -245,23 +245,25 @@ function getFilters(job) {
 const filters = document.querySelectorAll("#filter");
 
 filters.forEach(filter => {
-    filter.addEventListener('click', function onFilterClick(event) {
-        // saa teada tekst klikitud nupul
-        const filterTitleEl = event.target.textContent;
-        // lisa filter activeFilters arraysse
-        activeFilters.push(filterTitleEl);
-        drawDropMenu(filterTitleEl)
-        drawSelectedFilters()
-        
-        console.log(activeFilters)
-   })
+    filter.onclick = (event) => onFilterClick(event);
 })
 
-function drawDropMenu(filterTitleEl) {
-    filters.forEach(filter => {
-        if (activeFilters.includes(filterTitleEl)) {
+const onFilterClick = (event) => {
+    // saa teada tekst klikitud nupul
+    const filterTitleEl = event.target.textContent;
+    // lisa filter activeFilters arraysse
+    activeFilters.push(filterTitleEl);
+    drawDropMenu(filterTitleEl)
+    drawSelectedFilters()
+    
+    console.log(activeFilters)
+}
+
+function drawDropMenu() {
+    filters.forEach((filter) => {
+        if (activeFilters.includes(filter.textContent)) {
             filter.classList.add("activeFilter")
-        }
+        } 
     })
 }
 
