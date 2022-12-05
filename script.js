@@ -266,7 +266,7 @@ function drawDropMenu() {
 
     filters.forEach((filter) => {
         if (activeFilters.includes(filter.textContent)) {
-            filter.classList.add("activeFilters")
+            filter.classList.add("activeFilter")
         }
     })
 }
@@ -290,12 +290,12 @@ function createFilterTag(activeFilter) {
     const filterTagIconEl = document.createElement("div")
     filterTagIconEl.className = "filterTagIcon";
     filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'  
-    filterTagEl.onclick = () => onFilterTagClick(activeFilter, filterTagEl); 
+    filterTagEl.onclick = () => onRemoveFilter(activeFilter, filterTagEl); 
     filterTagEl.append(filterTagTitleEl, filterTagIconEl)
     return filterTagEl;
 }
 
-function onFilterTagClick(activeFilter, filterTagEl) {
+function onRemoveFilter(activeFilter, filterTagEl) {
     removeActiveFilter(activeFilter, filterTagEl)
     drawSelectedFilters()
     drawDropMenu()
