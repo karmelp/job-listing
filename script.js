@@ -267,6 +267,12 @@ function drawDropMenu() {
     })
 }
 
+filters.forEach((filter) => {
+    if (activeFilters.includes(filter.textContent)) {
+        filter.classList.add("activeFilters")
+    }
+})
+
 function drawSelectedFilters() {
     // võta filtririba element
     const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
