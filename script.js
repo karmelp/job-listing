@@ -241,19 +241,43 @@ function getFilters(job) {
     return filtersWrapperEl;
 }
 
+// vali köik filter IDga elemendid
+const filters = document.querySelectorAll("#filter");
+
+filters.forEach(filter => {
+    filter.addEventListener('click', function onFilterClick(event) {
+        // saa teada tekst klikitud nupul
+        const filterTitleEl = event.target.textContent;
+        // lisa filter activeFilters arraysse
+        activeFilters.push(filterTitleEl);
+        drawDropMenu(filterTitleEl)
+        drawSelectedFilters()
+        
+        console.log(activeFilters)
+   })
+})
+
+function drawDropMenu(filterTitleEl) {
+    filters.forEach(filter => {
+        if (activeFilters.includes(filterTitleEl)) {
+            filter.classList.add("activeFilter")
+        }
+    })
+}
+
 function createFilterTag(activeFilter) {
-        const filterTagEl = document.createElement("li")
-        filterTagEl.className = "filterTag";
-        filterTagEl.setAttribute("filterTitle", activeFilter);
-        const filterTagTitleEl = document.createElement("h2")
-        filterTagTitleEl.className = "filterTagTitle"
-        filterTagTitleEl.innerHTML = activeFilter;
-        const filterTagIconEl = document.createElement("div")
-        filterTagIconEl.className = "filterTagIcon";
-        filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'  
-        filterTagEl.onclick = () => onFilterTagClick(activeFilter, filterTagEl); 
-        filterTagEl.append(filterTagTitleEl, filterTagIconEl)
-        return filterTagEl;
+    const filterTagEl = document.createElement("li")
+    filterTagEl.className = "filterTag";
+    filterTagEl.setAttribute("filterTitle", activeFilter);
+    const filterTagTitleEl = document.createElement("h2")
+    filterTagTitleEl.className = "filterTagTitle"
+    filterTagTitleEl.innerHTML = activeFilter; 
+    const filterTagIconEl = document.createElement("div")
+    filterTagIconEl.className = "filterTagIcon";
+    filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'  
+    filterTagEl.onclick = () => onFilterTagClick(activeFilter, filterTagEl); 
+    filterTagEl.append(filterTagTitleEl, filterTagIconEl)
+    return filterTagEl;
 }
 
 function drawSelectedFilters() {
@@ -264,33 +288,6 @@ function drawSelectedFilters() {
         chosenFilterTagsEl.append(createFilterTag(activeFilter))
     })
 }
-
-// vali köik filter IDga elemendid
-const filters = document.querySelectorAll("#filter");
-
-filters.forEach(filter => {
-    filter.addEventListener('click', function onFilterClick(event) {
-        // saa teada tekst klikitud nupul
-        const filterTitleEl = event.target.textContent;
-        // kui klikitud button oli juba aktiivne...
-        if (this.classList.contains("activeFilter")){
-            // ...dektiveeri see menüüs
-            this.classList.remove("activeFilter")
-            // // // eemalda filter filtriribalt...
-            // onFilterTagClick()
-            // ...ja ka activeFilters arrayst
-            removeActiveFilter()
-        } else {
-            // aktiveeri sellel nupul activefilters classlist
-            this.classList.add("activeFilter")
-            // lisa filter activeFilters arraysse
-            activeFilters.push(filterTitleEl);
-            // ja tekita filtriribale sellele vastav nupp
-            drawSelectedFilters()
-            console.log('filterForEachElse', activeFilters)
-        }
-   })
-})
 
 function onFilterTagClick(activeFilter, filterTagEl) {
     if (filterTagEl.textContent == activeFilter) {
@@ -308,70 +305,5 @@ function removeActiveFilter() {
     activeFilters.splice(deleteIndex,1);
     console.log('removeActiveFilter', activeFilters)
 }
-    // filters.forEach(filter => {
-    //     filter.addEventListener('click', function onFilterClick(event) {
-    //         // võta filtririba element
-    //         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-    //         // saa teada tekst klikitud nupul
-    //         const filterTitleEl = event.target.textContent;
-    //         // loo filter
-    //         const filter = createFilterTag(filterTitleEl)
-    //         // kui klikitud button oli juba aktiivne...
-    //         if (this.classList.contains("activeFilter")){
-    //             // ...dektiveeri see menüüs
-    //             this.classList.remove("activeFilter")
-    //             // // eemalda filter filtriribalt...
-    //             // chosenFilterTagsEl.remove()
-    //             // ...ja ka activeFilters arrayst
-    //             activeFilters.map((filter) => {
-    //                 if (filter === filterTitleEl) {
-    //                     // uuri välja selle index arrays
-    //                     const deleteIndex = activeFilters.indexOf(filter);
-    //                     // ja eemalda see
-    //                     activeFilters.splice(deleteIndex,1);
-    //                     console.log(activeFilters)
-    //                 }
-    //             });
-    //         // kui aga nupp pole aktiivne...
-    //         } else {
-    //             // ...siis aktiveeri see menüüs
-    //             this.classList.add("activeFilter")
-    //             // ja tekita filtriribale sellele vastav nupp
-    //             chosenFilterTagsEl.append(filter)
-    //             // lisa filter activeFilters arraysse
-    //             activeFilters.push(filterTitleEl)
-    //             console.log(activeFilters)
-    //         }
-
-    //     })
-    // })
-
-
-
-    // // pane igaühele neist...
-    // filters.forEach(filter => {
-    //     // ...külge click funktsioon
-    //     filter.addEventListener('click', function (event) {
-    //         // võta filtririba element
-    //         const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-    //         // saa teada tekst klikitud nupul
-    //         const filterTitleEl = event.target.textContent;
-    //         // loo filter
-    //         const filter = createFilterTag(filterTitleEl)
-    //         // kui klikitud button oli juba aktiivne...
-    //         if (this.classList.contains("activeFilter")){
-    //             // ...dektiveeri see
-    //             this.classList.remove("activeFilter")
-    //             // ja eemalda nupp filtriribalt
-    //             chosenFilterTagsEl.removeChild(filter);
-    //         // kui aga nupp pole aktiivne...
-    //         } else {
-    //             // ...siis aktiveeri see
-    //             this.classList.add("activeFilter")
-    //             // ja tekita filtriribale sellele vastav nupp
-    //             chosenFilterTagsEl.append(filter)
-    //         }
-    //     });
-    // });
 
 showAllJobOffers();
