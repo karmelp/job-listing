@@ -253,7 +253,7 @@ const onFilterClick = (event) => {
     const filterTitleEl = event.target.textContent;
     // lisa filter activeFilters arraysse
     activeFilters.push(filterTitleEl);
-    drawDropMenu(filterTitleEl)
+    drawDropMenu()
     drawSelectedFilters()
     
     console.log(activeFilters)
@@ -292,10 +292,9 @@ function createFilterTag(activeFilter) {
 }
 
 function onFilterTagClick(activeFilter, filterTagEl) {
-    if (filterTagEl.textContent == activeFilter) {
-        filterTagEl.remove()
-        removeActiveFilter(activeFilter, filterTagEl)
-    }
+    removeActiveFilter(activeFilter, filterTagEl)
+    drawSelectedFilters()
+    drawDropMenu()
     console.log('onFilterTagClick', activeFilters)
 }
 
