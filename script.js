@@ -265,13 +265,13 @@ function drawDropMenu() {
             filter.classList.add("activeFilter")
         } 
     })
-}
 
-filters.forEach((filter) => {
-    if (activeFilters.includes(filter.textContent)) {
-        filter.classList.add("activeFilters")
-    }
-})
+    filters.forEach((filter) => {
+        if (activeFilters.includes(filter.textContent)) {
+            filter.classList.add("activeFilters")
+        }
+    })
+}
 
 function drawSelectedFilters() {
     // võta filtririba element
