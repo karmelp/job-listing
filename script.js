@@ -265,6 +265,15 @@ function drawDropMenu(filterTitleEl) {
     })
 }
 
+function drawSelectedFilters() {
+    // võta filtririba element
+    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
+    chosenFilterTagsEl.innerHTML = ""
+    activeFilters.forEach((activeFilter) => {
+        chosenFilterTagsEl.append(createFilterTag(activeFilter))
+    })
+}
+
 function createFilterTag(activeFilter) {
     const filterTagEl = document.createElement("li")
     filterTagEl.className = "filterTag";
@@ -280,30 +289,20 @@ function createFilterTag(activeFilter) {
     return filterTagEl;
 }
 
-function drawSelectedFilters() {
-    // võta filtririba element
-    const chosenFilterTagsEl = document.querySelector(".chosenFilterTags")
-    chosenFilterTagsEl.innerHTML = ""
-    activeFilters.forEach((activeFilter) => {
-        chosenFilterTagsEl.append(createFilterTag(activeFilter))
-    })
-}
-
 function onFilterTagClick(activeFilter, filterTagEl) {
     if (filterTagEl.textContent == activeFilter) {
         filterTagEl.remove()
+        removeActiveFilter(activeFilter, filterTagEl)
     }
-    removeActiveFilter()
     console.log('onFilterTagClick', activeFilters)
 }
 
 // eemalda filter aktiivsete filtrite arrayst
-function removeActiveFilter() {
-    // uuri välja selle index arrays
-    const deleteIndex = activeFilters.indexOf(filter);
-    // ja eemalda see
-    activeFilters.splice(deleteIndex,1);
-    console.log('removeActiveFilter', activeFilters)
+function removeActiveFilter(activeFilter, filterTagEl) {
+    if (filterTagEl.textContent == activeFilter) {
+        const deleteIndex = activeFilters.indexOf(activeFilter)
+        activeFilters.splice(deleteIndex,1);
+    }
 }
 
 showAllJobOffers();
