@@ -261,10 +261,8 @@ const onFilterClick = (event) => {
 
 function drawDropMenu() {
     filters.forEach((filter) => {
-        if (activeFilters.includes(filter.textContent)) {
-            filter.classList.add("activeFilter")
-        } 
-    })
+        filter.classList.remove("activeFilter")
+    }) 
 
     filters.forEach((filter) => {
         if (activeFilters.includes(filter.textContent)) {
