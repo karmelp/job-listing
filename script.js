@@ -272,7 +272,8 @@ function drawDropMenu() {
     const activeMenuFilters = document.querySelectorAll(".activeFilter");
   
     activeMenuFilters.forEach((activeMenuFilter) => {
-      activeMenuFilter.onclick = () =>
+      activeMenuFilter.onclick = (event) =>
+      onRemoveFilter(event)
         console.log("clicked active filter", activeMenuFilter.textContent);
     });
   }
