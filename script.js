@@ -264,6 +264,8 @@ activeMenuFilters.forEach(activeMenuFilter => {
 })
 
 const removeActiveMenuBtn = (event) => {
+    activeFilters.forEach(activeMenuFilter => console.log(activeMenuFilter))
+
     activeFilters.forEach((activeFilter) => {
         onRemoveFilter(activeFilter)
     })
