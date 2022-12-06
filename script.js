@@ -272,9 +272,9 @@ function drawDropMenu() {
     const activeMenuFilters = document.querySelectorAll(".activeFilter");
   
     activeMenuFilters.forEach((activeMenuFilter) => {
-      activeMenuFilter.onclick = (event) =>
-        console.log('clicked active filters', activeMenuFilter.textContent)
-        onRemoveFilter(activeMenuFilter.textContent)
+        activeMenuFilter.onclick = () => {
+            onRemoveFilter(activeMenuFilter.textContent)
+        }
     });
   }
 
@@ -307,6 +307,7 @@ function onRemoveFilter(activeFilter) {
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
+    console.log('activefilters', activeFilters)
 }
 
 // eemalda filter aktiivsete filtrite arrayst
