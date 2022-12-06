@@ -273,8 +273,8 @@ function drawDropMenu() {
   
     activeMenuFilters.forEach((activeMenuFilter) => {
       activeMenuFilter.onclick = (event) =>
-      onRemoveFilter(event)
-        console.log("clicked active filter", activeMenuFilter.textContent);
+        console.log('clicked active filters', activeMenuFilter.textContent)
+        onRemoveFilter(activeMenuFilter.textContent)
     });
   }
 
@@ -303,6 +303,7 @@ function createFilterTag(activeFilter) {
 }
 
 function onRemoveFilter(activeFilter) {
+    console.log('activefilter in onremovefilter', activeFilter)
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
