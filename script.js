@@ -264,10 +264,8 @@ activeMenuFilters.forEach(activeMenuFilter => {
 })
 
 const removeActiveMenuBtn = (event) => {
-    // saa teada tekst klikitud nupul
-    const filterTagEl = event.target.textContent;
     activeFilters.forEach((activeFilter) => {
-        onRemoveFilter(activeFilter, filterTagEl)
+        onRemoveFilter(activeFilter)
     })
 }
 
@@ -302,24 +300,21 @@ function createFilterTag(activeFilter) {
     const filterTagIconEl = document.createElement("div")
     filterTagIconEl.className = "filterTagIcon";
     filterTagIconEl.innerHTML = '<img src="images/icon-remove.svg"/>'  
-    filterTagEl.onclick = () => onRemoveFilter(activeFilter, filterTagEl); 
+    filterTagEl.onclick = () => onRemoveFilter(activeFilter); 
     filterTagEl.append(filterTagTitleEl, filterTagIconEl)
     return filterTagEl;
 }
 
-function onRemoveFilter(activeFilter, filterTagEl) {
-    removeActiveFilter(activeFilter, filterTagEl)
+function onRemoveFilter(activeFilter) {
+    removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
-    console.log('onFilterTagClick', activeFilters)
 }
 
 // eemalda filter aktiivsete filtrite arrayst
-function removeActiveFilter(activeFilter, filterTagEl) {
-    if (filterTagEl.textContent == activeFilter) {
-        const deleteIndex = activeFilters.indexOf(activeFilter)
-        activeFilters.splice(deleteIndex,1);
-    }
+function removeActiveFilter(activeFilter) {
+    const deleteIndex = activeFilters.indexOf(activeFilter)
+    activeFilters.splice(deleteIndex,1);
 }
 
 showAllJobOffers();
