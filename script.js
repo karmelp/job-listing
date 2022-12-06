@@ -243,7 +243,6 @@ function getFilters(job) {
 
 // vali köik filter IDga elemendid
 const filters = document.querySelectorAll("#filter");
-
 filters.forEach(filter => {
     filter.onclick = (event) => onFilterClick(event);
 })
@@ -257,6 +256,19 @@ const onFilterClick = (event) => {
     drawSelectedFilters()
     
     console.log(activeFilters)
+}
+
+const activeMenuFilters = document.querySelectorAll(".activeFilter");
+activeMenuFilters.forEach(activeMenuFilter => {
+    activeMenuFilter.onclick = (event) => removeActiveMenuBtn(event)
+})
+
+const removeActiveMenuBtn = (event) => {
+    // saa teada tekst klikitud nupul
+    const filterTagEl = event.target.textContent;
+    activeFilters.forEach((activeFilter) => {
+        onRemoveFilter(activeFilter, filterTagEl)
+    })
 }
 
 function drawDropMenu() {
