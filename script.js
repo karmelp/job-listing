@@ -258,30 +258,24 @@ const onFilterClick = (event) => {
     console.log(activeFilters)
 }
 
-const activeMenuFilters = document.querySelectorAll(".activeFilter");
-activeMenuFilters.forEach(activeMenuFilter => {
-    activeMenuFilter.onclick = (event) => removeActiveMenuBtn(event)
-})
-
-const removeActiveMenuBtn = (event) => {
-    activeFilters.forEach(activeMenuFilter => console.log(activeMenuFilter))
-
-    activeFilters.forEach((activeFilter) => {
-        onRemoveFilter(activeFilter)
-    })
-}
-
 function drawDropMenu() {
     filters.forEach((filter) => {
-        filter.classList.remove("activeFilter")
-    }) 
-
+      filter.classList.remove("activeFilter");
+    });
+  
     filters.forEach((filter) => {
-        if (activeFilters.includes(filter.textContent)) {
-            filter.classList.add("activeFilter")
-        }
-    })
-}
+      if (activeFilters.includes(filter.textContent)) {
+        filter.classList.add("activeFilter");
+      }
+    });
+  
+    const activeMenuFilters = document.querySelectorAll(".activeFilter");
+  
+    activeMenuFilters.forEach((activeMenuFilter) => {
+      activeMenuFilter.onclick = () =>
+        console.log("clicked active filter", activeMenuFilter.textContent);
+    });
+  }
 
 function drawSelectedFilters() {
     // võta filtririba element
