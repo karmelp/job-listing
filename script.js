@@ -257,8 +257,6 @@ const onFilterClick = (event) => {
 
     if (activeFilters.length > 0) {
         showClearBtn();
-    } else {
-        hideClearBtn()
     }
     
     console.log(activeFilters)
@@ -314,6 +312,9 @@ function onRemoveFilter(activeFilter) {
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
+    if (activeFilters.length < 1) {
+        hideClearBtn()
+    }
 }
 
 // eemalda filter aktiivsete filtrite arrayst
@@ -332,13 +333,15 @@ function hideClearBtn() {
     clearBtnEl.style.visibility = "hidden"
 }
 
-function clearAllActiveFilters() {
-    activeFilters.forEach((activeFilter) => {
-        activeFilters.splice(activeFilters)
-        removeActiveFilter(activeFilter)
-        drawSelectedFilters()
-        drawDropMenu()
-    })
+function clearAllActiveFilters(activeFilter) {
+    activeFilters.splice(activeFilters)
+    if (activeFilters.length < 1) {
+        hideClearBtn()
+    }
+    console.log(activeFilters)
+    removeActiveFilter(activeFilter)
+    drawSelectedFilters()
+    drawDropMenu()
 }
 
 clearBtnEl.onclick = clearAllActiveFilters;
