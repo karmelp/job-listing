@@ -254,19 +254,26 @@ const onFilterClick = (event) => {
     activeFilters.push(filterTitleEl);
     drawDropMenu()
     drawSelectedFilters()
+
+    if (activeFilters.length > 0) {
+        showClearBtn();
+    } else {
+        hideClearBtn()
+    }
     
     console.log(activeFilters)
 }
 
 function drawDropMenu() {
     filters.forEach((filter) => {
-      filter.classList.remove("activeFilter");
+        filter.classList.remove("activeFilter");
+        filter.onclick = onFilterClick;
     });
   
     filters.forEach((filter) => {
-      if (activeFilters.includes(filter.textContent)) {
-        filter.classList.add("activeFilter");
-      }
+        if (activeFilters.includes(filter.textContent)) {
+            filter.classList.add("activeFilter");
+        }
     });
   
     const activeMenuFilters = document.querySelectorAll(".activeFilter");
@@ -276,7 +283,7 @@ function drawDropMenu() {
             onRemoveFilter(activeMenuFilter.textContent)
         }
     });
-  }
+}
 
 function drawSelectedFilters() {
     // võta filtririba element
@@ -307,7 +314,6 @@ function onRemoveFilter(activeFilter) {
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
-    console.log('activefilters', activeFilters)
 }
 
 // eemalda filter aktiivsete filtrite arrayst
@@ -315,5 +321,26 @@ function removeActiveFilter(activeFilter) {
     const deleteIndex = activeFilters.indexOf(activeFilter)
     activeFilters.splice(deleteIndex,1);
 }
+
+const clearBtnEl = document.querySelector(".clearBtn")
+
+function showClearBtn() {
+    clearBtnEl.style.visibility = "visible"
+}
+
+function hideClearBtn() {
+    clearBtnEl.style.visibility = "hidden"
+}
+
+function clearAllActiveFilters() {
+    activeFilters.forEach((activeFilter) => {
+        activeFilters.splice(activeFilters)
+        removeActiveFilter(activeFilter)
+        drawSelectedFilters()
+        drawDropMenu()
+    })
+}
+
+clearBtnEl.onclick = clearAllActiveFilters;
 
 showAllJobOffers();
