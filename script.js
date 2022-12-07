@@ -338,12 +338,27 @@ function clearAllActiveFilters(activeFilter) {
     if (activeFilters.length < 1) {
         hideClearBtn()
     }
-    console.log(activeFilters)
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
 }
 
 clearBtnEl.onclick = clearAllActiveFilters;
+
+const jobDetailTagEl = document.querySelector(".jobDetailTag");
+
+// filtreerib välja job offerid, mis vastavad aktiivsetele filtritele
+function filterJobOffers() {
+    const res = jobOffers.filter(activeFilter => !arr2.includes(activeFilter));
+}
+
+function drawFilteredJobOffers() {
+    const jobListingsContainerEl = document.querySelector(".jobListingsContainer")
+    jobListingsContainerEl.innerHTML = ""
+    activeFilters.forEach((activeFilter) => {
+        
+    })
+
+}
 
 showAllJobOffers();
