@@ -134,16 +134,17 @@ function jobOfferContainer(job) {
     jobListingsEl.appendChild(jobOfferEl)
 }
 
-// .filter meetod tagastab ainult need job offerid, mille puhul return tingimus on tõene
-const filteredData = normalizedJobOffers.filter((normalizedJobOffer) => {
-    // tingimus on, et iga aktiivne filter (every) peab sisalduma töökuulutuse filtris (includes)
-    return activeFilters.every((filter) =>
-        normalizedJobOffer.filters.includes(filter)
-    );
-});
-
 // Kasutaja näeb kõiki tööpakkumisi
 function showAllJobOffers() {
+    document.querySelector(".jobListingsContainer").innerHTML = "";
+
+    // .filter meetod tagastab ainult need job offerid, mille puhul return tingimus on tõene
+    const filteredData = normalizedJobOffers.filter((normalizedJobOffer) => {
+        // tingimus on, et iga aktiivne filter (every) peab sisalduma töökuulutuse filtris (includes)
+        return activeFilters.every((filter) =>
+            normalizedJobOffer.filters.includes(filter)
+        );
+    });
     // joonista HTML element iga taski jaoks
     filteredData.forEach((job) => {
         jobOfferContainer(job);
@@ -254,6 +255,7 @@ const onFilterClick = (event) => {
     activeFilters.push(filterTitleEl);
     drawDropMenu()
     drawSelectedFilters()
+    showAllJobOffers()
 
     if (activeFilters.length > 0) {
         showClearBtn();
@@ -279,6 +281,7 @@ function drawDropMenu() {
     activeMenuFilters.forEach((activeMenuFilter) => {
         activeMenuFilter.onclick = () => {
             onRemoveFilter(activeMenuFilter.textContent)
+            showAllJobOffers()
         }
     });
 }
@@ -290,6 +293,7 @@ function drawSelectedFilters() {
     activeFilters.forEach((activeFilter) => {
         chosenFilterTagsEl.append(createFilterTag(activeFilter))
     })
+
 }
 
 function createFilterTag(activeFilter) {
@@ -344,21 +348,5 @@ function clearAllActiveFilters(activeFilter) {
 }
 
 clearBtnEl.onclick = clearAllActiveFilters;
-
-const jobDetailTagEl = document.querySelector(".jobDetailTag");
-
-// filtreerib välja job offerid, mis vastavad aktiivsetele filtritele
-function filterJobOffers() {
-    const res = jobOffers.filter(activeFilter => !arr2.includes(activeFilter));
-}
-
-function drawFilteredJobOffers() {
-    const jobListingsContainerEl = document.querySelector(".jobListingsContainer")
-    jobListingsContainerEl.innerHTML = ""
-    activeFilters.forEach((activeFilter) => {
-        
-    })
-
-}
 
 showAllJobOffers();
