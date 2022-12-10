@@ -316,6 +316,7 @@ function onRemoveFilter(activeFilter) {
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
+    showAllJobOffers()
     if (activeFilters.length < 1) {
         hideClearBtn()
     }
@@ -345,6 +346,7 @@ function clearAllActiveFilters(activeFilter) {
     removeActiveFilter(activeFilter)
     drawSelectedFilters()
     drawDropMenu()
+    showAllJobOffers()
 }
 
 clearBtnEl.onclick = clearAllActiveFilters;
